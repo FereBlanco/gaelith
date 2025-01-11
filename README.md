@@ -1,2 +1,2 @@
-# gaelith
-Gäelith. The Voice of the Stones - Gamedev repo
+# Gäelith. The Voice of the Stones
+Gamedev repo, by Fere Blanco
