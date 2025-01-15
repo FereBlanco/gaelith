@@ -130,6 +130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneDynamic02
       objectReference: {fileID: 0}
+    - target: {fileID: 803910916614685379, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1848461899845204975, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -226,6 +230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 5877361002866032815, guid: b9d38b22e7dcdfd45a5a4bc7ed56e101, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7247198338060678270, guid: b9d38b22e7dcdfd45a5a4bc7ed56e101, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -283,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneSpecial02
       objectReference: {fileID: 0}
+    - target: {fileID: 419985657084706532, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -339,6 +351,10 @@ PrefabInstance:
     - target: {fileID: 419985657084706532, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_Name
       value: StoneSpecial03
+      objectReference: {fileID: 0}
+    - target: {fileID: 419985657084706532, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.x
@@ -674,6 +690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneStatic03
       objectReference: {fileID: 0}
+    - target: {fileID: 6468225142126825064, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -795,6 +815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneStatic02
       objectReference: {fileID: 0}
+    - target: {fileID: 6468225142126825064, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -811,6 +835,10 @@ PrefabInstance:
     - target: {fileID: 803910916614685379, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_Name
       value: StoneDynamic03
+      objectReference: {fileID: 0}
+    - target: {fileID: 803910916614685379, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848461899845204975, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_IsTrigger
@@ -916,6 +944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneStatic01
       objectReference: {fileID: 0}
+    - target: {fileID: 6468225142126825064, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -973,6 +1005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5817539890727439163, guid: 05aaebdd5cd67a6439f8f6996a67640e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -989,6 +1025,10 @@ PrefabInstance:
     - target: {fileID: 803910916614685379, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_Name
       value: StoneDynamic01
+      objectReference: {fileID: 0}
+    - target: {fileID: 803910916614685379, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1848461899845204975, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_IsTrigger
@@ -1236,6 +1276,10 @@ PrefabInstance:
     - target: {fileID: 419985657084706532, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_Name
       value: StoneSpecial01
+      objectReference: {fileID: 0}
+    - target: {fileID: 419985657084706532, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.x
