@@ -8,6 +8,8 @@ public class StoneHitManager : MonoBehaviour
     public event StoneStopEventHandler OnStoneStop;
     public bool isSpecial = false;
 
+    public DG.Tweening.Ease ease;
+
     public void Hit(Transform hitterTransform)
     {
         RaycastHit limitHit;
@@ -18,7 +20,9 @@ public class StoneHitManager : MonoBehaviour
                 int intDistance = Mathf.FloorToInt(limitHit.distance);
                 if (intDistance > 0)
                 {
-                    transform.DOMove(intDistance * hitterTransform.forward + transform.position, intDistance * Constants.STONE_MOVE_TIME)
+                    transform.DOMove(intDistance * hitterTransform.forward + transform.position,
+                        intDistance * Constants.STONE_MOVE_TIME)
+                        .SetEase(Ease.OutCirc)
                         .OnComplete(LaunchOnStoneStopEvent);
                 }
             }
