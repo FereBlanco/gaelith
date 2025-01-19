@@ -2,8 +2,12 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 
-public class Hittable : MonoBehaviour
+public class StoneHitManager : MonoBehaviour
 {
+    public delegate void StoneStopEventHandler(bool isSpecial);
+    public event StoneStopEventHandler OnStoneStop;
+    public bool isSpecial = false;
+
     public void Hit(Transform hitterTransform)
     {
         RaycastHit limitHit;
@@ -14,9 +18,15 @@ public class Hittable : MonoBehaviour
                 int intDistance = Mathf.FloorToInt(limitHit.distance);
                 if (intDistance > 0)
                 {
-                    transform.DOMove(intDistance * hitterTransform.forward + transform.position, intDistance * Constants.STONE_MOVE_TIME);
+                    transform.DOMove(intDistance * hitterTransform.forward + transform.position, intDistance * Constants.STONE_MOVE_TIME)
+                        .OnComplete(LaunchOnStoneStopEvent);
                 }
             }
         }
+    }
+
+    private void LaunchOnStoneStopEvent()
+    {
+        OnStoneStop?.Invoke(isSpecial);
     }
 }
