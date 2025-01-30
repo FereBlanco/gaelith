@@ -95,24 +95,19 @@ public class PlayerControlManager : MonoBehaviour
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(transform.DORotate(new Vector3(transform.eulerAngles.x + pushAngle, transform.eulerAngles.y, transform.eulerAngles.z), Constants.PLAYER_PUSH_TIME/2));
         mySequence.Append(transform.DORotate(new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z), Constants.PLAYER_PUSH_TIME/2));
+        AllowMovement();
 
         RaycastHit hit;
-        bool hitMade = false;
         if (Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, transform.TransformDirection(Vector3.forward), out hit, 1f))
         {
-            if (hit.transform != null)
+            if (null != hit.transform)
             {
                 StoneHitManager hittable = hit.transform.GetComponent<StoneHitManager>();
-                if (hittable != null)
+                if (null != hittable)
                 {
                     hittable.Hit(transform);
-                    hitMade = true;
                 }
             }
-        }
-        if (!hitMade)
-        {
-            AllowMovement();
         }
     }
 }
