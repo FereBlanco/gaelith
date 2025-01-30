@@ -37,7 +37,6 @@ public class KeyStonesManager : MonoBehaviour
         if ((xPositions[0] == xPositions[1] && xPositions[1] == xPositions[2] && zPositions[1] == zPositions[0] + 1 && zPositions[2] == zPositions[1] + 1) ||
             (zPositions[0] == zPositions[1] && zPositions[1] == zPositions[2] && xPositions[1] == xPositions[0] + 1 && xPositions[2] == xPositions[1] + 1))
         {
-            Debug.Log("Special stones in a row!!!");
             centralPosition = new Vector3(xPositions[1], 0.0f, zPositions[1]);
             foreach (StoneHitManager stoneHitManager in specialStones) Destroy(stoneHitManager.gameObject);
             OnKeyStonesAligned?.Invoke(centralPosition);
