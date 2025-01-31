@@ -1,1 +1,1 @@
-[ ] Animation of the three stones to the center, and then launch the event
+[ ] Put Gaelith and PortalKey on separate layers. The stones collide with the PortalKey but Gaelith can pass through it and take it.
