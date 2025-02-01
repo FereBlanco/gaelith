@@ -14,6 +14,9 @@ public class PlayerControlManager : MonoBehaviour
     private float rotateAngle = 90f;
     private float pushAngle = 20f;
 
+    // Only for testing purposes
+    public bool gameCompleted = false;
+
 
     private void Awake() {
         Assert.IsNotNull(ease, "ERROR: ease value is empty!!!");
@@ -29,7 +32,7 @@ public class PlayerControlManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space)) Hit();
     }
 
-    private void DontAllowMovement()
+    public void DontAllowMovement()
     {
         canMove = false;
     }
@@ -120,4 +123,14 @@ public class PlayerControlManager : MonoBehaviour
             }
         }
     }
+
+    // Only for testing purposes
+    void FixedUpdate()
+    {
+        if (true == gameCompleted)
+        {
+            canMove = false;
+            transform.Rotate(Vector3.up, 250.0f * Time.deltaTime);
+        }
+    }    
 }

@@ -66,16 +66,16 @@ public class KeyStonesManager : MonoBehaviour
         {
             stoneHitManager.GetComponent<Collider>().enabled = false;
             stoneHitManager.transform.DOMove(stoneHitManager.transform.position + stonesTogetherHeight * Vector3.up,
-                        timeToStonesTogetherFX / 2);
-                        // .SetEase(Ease.OutCirc);
+                        timeToStonesTogetherFX / 2)
+                        .SetEase(Ease.OutCirc);
         }
         yield return new WaitForSeconds(timeToStonesTogetherFX / 2);
 
         foreach (StoneHitManager stoneHitManager in specialStones)
         {
             stoneHitManager.transform.DOMove(centralPosition,
-                        timeToStonesTogetherFX / 2);
-                        // .SetEase(Ease.OutCirc);
+                        timeToStonesTogetherFX / 2)
+                        .SetEase(Ease.OutCirc);
         }
         yield return new WaitForSeconds(timeToStonesTogetherFX / 2);
 

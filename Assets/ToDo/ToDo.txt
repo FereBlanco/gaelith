@@ -1,2 +1,2 @@
-[ ] Put Gaelith and PortalKey on separate layers. The stones collide with the PortalKey but Gaelith can pass through it and take it.
 [ ] Refactor player: PlayerInput / PlayerMovement / PlayerSquaresInfo
+[ ] Refactor RoomManager

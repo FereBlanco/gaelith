@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.y
@@ -270,6 +270,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1990983779}
   m_SourcePrefab: {fileID: 100100000, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
+--- !u!1 &343123079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2676272361221845057, guid: d1b436dc31227944f8387450952f891a, type: 3}
+  m_PrefabInstance: {fileID: 4759493707684573584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &464714811 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 803910916614685379, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
@@ -605,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.y
@@ -735,6 +740,7 @@ MonoBehaviour:
   - {fileID: 1904298181}
   keyStonesManager: {fileID: 1243100764}
   portalKeyPrefab: {fileID: 8084814168767236427, guid: 2a2f7c4963bd38044ab2e76aa5dcd047, type: 3}
+  portalDoorGO: {fileID: 343123079}
 --- !u!4 &1459921182
 Transform:
   m_ObjectHideFlags: 0
@@ -799,7 +805,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -807,7 +813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -887,7 +893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1027,7 +1033,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1035,7 +1041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1100,7 +1106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4332,7 +4338,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 250821715195532048, guid: d94fdb45fb7ec124c8d7bca36ddbe2f9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8441,7 +8447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8449,7 +8455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7544936992229575429, guid: 79b520fc17474374eaa99887c9b79261, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9408,10 +9414,6 @@ PrefabInstance:
     - target: {fileID: 2676272361221845057, guid: d1b436dc31227944f8387450952f891a, type: 3}
       propertyPath: m_Name
       value: PortalDoor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2676272361221845057, guid: d1b436dc31227944f8387450952f891a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6775498456773406675, guid: d1b436dc31227944f8387450952f891a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14560,7 +14562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4639940416018615423, guid: bf3fa41b1e64d8345b926058ac879b35, type: 3}
       propertyPath: m_LocalPosition.y
