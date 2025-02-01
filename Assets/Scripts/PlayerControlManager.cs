@@ -14,6 +14,9 @@ public class PlayerControlManager : MonoBehaviour
     private float rotateAngle = 90f;
     private float pushAngle = 20f;
 
+    // Only for testing purposes
+    public bool gameCompleted = false;
+
 
     private void Awake() {
         Assert.IsNotNull(ease, "ERROR: ease value is empty!!!");
@@ -29,7 +32,7 @@ public class PlayerControlManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space)) Hit();
     }
 
-    private void DontAllowMovement()
+    public void DontAllowMovement()
     {
         canMove = false;
     }
@@ -41,16 +44,26 @@ public class PlayerControlManager : MonoBehaviour
 
     private bool IsFrontTileWalkable()
     {
-        RaycastHit hit;
-        bool frontTileNotWalkable = Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, transform.TransformDirection(Vector3.forward), out hit, 1f);
-        return !frontTileNotWalkable;
+        SquareInfo squareInfo = GetSquareInfo(transform.TransformDirection(Vector3.forward), 1.0f);
+        return (null == squareInfo || squareInfo.IsWalkable);
     }
 
     private bool IsBackTileWalkable()
     {
+        SquareInfo squareInfo = GetSquareInfo(transform.TransformDirection(-1f * Vector3.forward), 1.0f);
+        return (null == squareInfo || squareInfo.IsWalkable);
+    }
+
+    private SquareInfo GetSquareInfo(Vector3 vectorDirection, float distance)
+    {
+        SquareInfo squareInfo = null;
         RaycastHit hit;
-        bool backTileNotWalkable = Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, transform.TransformDirection(-1f * Vector3.forward), out hit, 1f);
-        return !backTileNotWalkable;
+        Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, vectorDirection, out hit, distance);
+        if (null != hit.transform)
+        {
+            squareInfo = hit.transform.GetComponent<SquareInfo>();
+        }
+        return squareInfo;
     }
 
     private void MoveForward()
@@ -110,4 +123,14 @@ public class PlayerControlManager : MonoBehaviour
             }
         }
     }
+
+    // Only for testing purposes
+    void FixedUpdate()
+    {
+        if (true == gameCompleted)
+        {
+            canMove = false;
+            transform.Rotate(Vector3.up, 250.0f * Time.deltaTime);
+        }
+    }    
 }

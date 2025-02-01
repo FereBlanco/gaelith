@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7544936992229575429}
   - component: {fileID: 1848461899845204975}
+  - component: {fileID: 6129064674066822177}
   m_Layer: 0
   m_Name: StoneDynamic
   m_TagString: Untagged
@@ -54,6 +55,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &6129064674066822177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803910916614685379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d467e4e08bff5e41b3d62c16c791e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalkable: 0
+  isSlideable: 0
 --- !u!1001 &5697716937320099546
 PrefabInstance:
   m_ObjectHideFlags: 0

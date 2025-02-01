@@ -2,6 +2,10 @@ using UnityEngine;
 
 public static class Constants
 {
+    public static string TAG_PLAYER = "Player";
+    public static string TAG_PORTAL_KEY = "PortalKey";
+    public static string TAG_PORTAL_DOOR = "PortalDoor";
+
     public static float PLAYER_MOVE_TIME = 0.08f;
     public static float PLAYER_ROTATE_TIME = 0.15f;
     public static float PLAYER_PUSH_TIME = 0.1f;
