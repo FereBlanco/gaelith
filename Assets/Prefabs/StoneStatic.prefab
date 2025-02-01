@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 250821715195532048}
   - component: {fileID: 3859303932563067903}
   - component: {fileID: 4229489823590016663}
+  - component: {fileID: -4884039771447400963}
   m_Layer: 0
   m_Name: StoneStatic
   m_TagString: Untagged
@@ -82,6 +83,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-4884039771447400963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6468225142126825064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d467e4e08bff5e41b3d62c16c791e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalkable: 0
+  isSlideable: 0
 --- !u!1001 &7706083574637589870
 PrefabInstance:
   m_ObjectHideFlags: 0

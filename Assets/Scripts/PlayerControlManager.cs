@@ -41,16 +41,26 @@ public class PlayerControlManager : MonoBehaviour
 
     private bool IsFrontTileWalkable()
     {
-        RaycastHit hit;
-        bool frontTileNotWalkable = Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, transform.TransformDirection(Vector3.forward), out hit, 1f);
-        return !frontTileNotWalkable;
+        SquareInfo squareInfo = GetSquareInfo(transform.TransformDirection(Vector3.forward), 1.0f);
+        return (null == squareInfo || squareInfo.IsWalkable);
     }
 
     private bool IsBackTileWalkable()
     {
+        SquareInfo squareInfo = GetSquareInfo(transform.TransformDirection(-1f * Vector3.forward), 1.0f);
+        return (null == squareInfo || squareInfo.IsWalkable);
+    }
+
+    private SquareInfo GetSquareInfo(Vector3 vectorDirection, float distance)
+    {
+        SquareInfo squareInfo = null;
         RaycastHit hit;
-        bool backTileNotWalkable = Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, transform.TransformDirection(-1f * Vector3.forward), out hit, 1f);
-        return !backTileNotWalkable;
+        Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, vectorDirection, out hit, distance);
+        if (null != hit.transform)
+        {
+            squareInfo = hit.transform.GetComponent<SquareInfo>();
+        }
+        return squareInfo;
     }
 
     private void MoveForward()

@@ -6,7 +6,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] PlayerControlManager player;
     [SerializeField] StoneHitManager[] dynamicStones;
     [SerializeField] KeyStonesManager keyStonesManager;
-    [SerializeField] GameObject portalKey;
+    [SerializeField] GameObject portalKeyPrefab;
     GUIStyle style;
 
 
@@ -14,7 +14,7 @@ public class RoomManager : MonoBehaviour
         Assert.IsNotNull(player, "ERROR: player not set in RoomManager");
         Assert.IsNotNull(dynamicStones, "ERROR: dynamicStones not set in RoomManager");
         Assert.IsNotNull(keyStonesManager, "ERROR: keyStonesManager not set in RoomManager");
-        Assert.IsNotNull(portalKey, "ERROR: portalKey not set in RoomManager");
+        Assert.IsNotNull(portalKeyPrefab, "ERROR: portalKey not set in RoomManager");
 
         style = new GUIStyle();
         style.richText = true;
@@ -24,7 +24,20 @@ public class RoomManager : MonoBehaviour
 
     private void OnKeyStonesAlignedCallback(Vector3 centralPosition)
     {
-        Instantiate(portalKey, centralPosition, Quaternion.identity);
+        GameObject portalKey = Instantiate(portalKeyPrefab, centralPosition, Quaternion.identity);
+        portalKey.transform.tag = Constants.TAG_PORTAL_KEY;
+        
+        Collectible collectible = portalKey.AddComponent<Collectible>();
+        collectible.OnCollectibleCollected += OnCollectibleCollectedCallback;
+    }
+
+    private void OnCollectibleCollectedCallback(Transform transform)
+    {
+        if (transform.CompareTag(Constants.TAG_PORTAL_KEY))
+        {
+            Debug.Log("Portal Key collected >> Open the PortalDoor");
+        }
+        Destroy(transform.gameObject);
     }
 
     private void OnGUI()
