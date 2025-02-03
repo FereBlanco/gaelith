@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 1774062753880956604}
   - component: {fileID: 954631289911085185}
   - component: {fileID: 6704254601387118381}
+  - component: {fileID: -4723071794367054572}
+  - component: {fileID: -241632554275056313}
+  - component: {fileID: -252682660431566359}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -47,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e9e0db3a013514f848a18bd3be0c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ease: 19
+  m_GameCompleted: 0
 --- !u!54 &954631289911085185
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,6 +99,50 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 1.7, z: 0.8}
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &-4723071794367054572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817539890727439163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ece7b9382e63a4792163e5744647af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ForwardKey: 273
+  m_BackwardKey: 274
+  m_RotateLeftKey: 276
+  m_RotateRightKey: 275
+  m_PullKey: 32
+--- !u!114 &-241632554275056313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817539890727439163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52fa4643ff4de384f8251cff92c1eb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ease: 0
+  rotateAngle: 90
+--- !u!114 &-252682660431566359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817539890727439163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a2c8bb8245235459fd317228634b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PullAngle: 20
 --- !u!1001 &1628875902590861161
 PrefabInstance:
   m_ObjectHideFlags: 0

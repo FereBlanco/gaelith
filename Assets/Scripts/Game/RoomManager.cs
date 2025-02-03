@@ -1,9 +1,10 @@
 using UnityEngine.Assertions;
 using UnityEngine;
+using Scripts.Game.Player;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] PlayerControlManager player;
+    [SerializeField] Player player;
     [SerializeField] StoneHitManager[] dynamicStones;
     [SerializeField] KeyStonesManager keyStonesManager;
     [SerializeField] GameObject portalKeyPrefab;
@@ -46,7 +47,7 @@ public class RoomManager : MonoBehaviour
         if (transform.CompareTag(Constants.TAG_PORTAL_DOOR))
         {
             collectible.OnCollectibleCollected -= OnCollectibleCollectedCallback;
-            player.gameCompleted = true;
+            player.m_GameCompleted = true;
         }
     }
 }
