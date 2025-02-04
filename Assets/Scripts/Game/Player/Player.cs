@@ -33,7 +33,7 @@ namespace Scripts.Game.Player
             m_PlayerMovement.Rotate(inputRotationVector);
 
             Vector3 inputPullVector = m_PlayerInput.InputPullVector;
-            m_PlayerAction.Pull(inputPullVector);
+            m_PlayerAction.Push(inputPullVector);
 
 
             // Only for testing purposes
