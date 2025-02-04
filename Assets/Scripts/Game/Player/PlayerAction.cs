@@ -20,7 +20,7 @@ namespace Scripts.Game.Player
         }
 
         // Public Methods
-        public void Pull(Vector3 inputPullVector)
+        public void Push(Vector3 inputPullVector)
         {
             if (m_PlayerMovement.CanMove && inputPullVector != Vector3.zero)
             {
