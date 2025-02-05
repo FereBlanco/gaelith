@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4377561719932400301}
   - component: {fileID: 1786242305803303534}
   - component: {fileID: 5707120283424397647}
+  - component: {fileID: 2053698958723968523}
   m_Layer: 0
-  m_Name: StoneSpecial
+  m_Name: KeyStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +98,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalkable: 0
   isSlideable: 0
+  isCollectible: 0
+--- !u!114 &2053698958723968523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419985657084706532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9575a5bb0d5cbed47948d5913df442b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpecial: 1
+  ease: 9
 --- !u!1001 &6360746245088402603
 PrefabInstance:
   m_ObjectHideFlags: 0

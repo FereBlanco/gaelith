@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4229489823590016663}
   - component: {fileID: -4884039771447400963}
   m_Layer: 0
-  m_Name: StoneStatic
+  m_Name: StaticStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalkable: 0
   isSlideable: 0
+  isCollectible: 0
 --- !u!1001 &7706083574637589870
 PrefabInstance:
   m_ObjectHideFlags: 0

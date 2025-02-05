@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using Scripts.Game.Stones;
 
 namespace Scripts.Game.Player
 {
