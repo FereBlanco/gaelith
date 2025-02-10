@@ -4,24 +4,26 @@ using UnityEngine.Assertions;
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
+using Scripts.Game.Stones.StonePool;
 
 namespace Scripts.Game.Stones
 {
     public class KeyStoneManager : MonoBehaviour
     {
-        [SerializeField] List<StoneHitManager> specialStones;
-        private Vector3 centralPosition;
-        private List<int> xPositions;
-        private List<int> zPositions;
+        private List<StoneHitManager> m_KeyStones;
+        private Vector3 m_CentralPosition;
+        private List<int> m_XPositions;
+        private List<int> m_ZPositions;
 
-        private float timeToStonesTogetherFX = 0.5f;
-        private float stonesTogetherHeight = 2.0f;
+        private float m_TimeToStonesTogetherFX = 0.5f;
+        private float m_StonesTogetherHeight = 2.0f;
 
         public event Action<Vector3> OnKeyStonesAligned;
 
         private void Awake() {
-            xPositions = new List<int>();
-            zPositions = new List<int>();
+            Debug.Log("KeyStoneManager Awake");
+            m_XPositions = new List<int>();
+            m_ZPositions = new List<int>();
         }
 
         private void HandleOnStoneStop(bool isSpecial)
@@ -34,63 +36,66 @@ namespace Scripts.Game.Stones
 
         private bool AreStonesInARow()
         {
-            xPositions.Clear();
-            zPositions.Clear();
+            m_XPositions.Clear();
+            m_ZPositions.Clear();
 
-            foreach (StoneHitManager stoneHitManager in specialStones)
+            foreach (StoneHitManager stoneHitManager in m_KeyStones)
             {
-                xPositions.Add(Mathf.RoundToInt(stoneHitManager.transform.position.x));
-                zPositions.Add(Mathf.RoundToInt(stoneHitManager.transform.position.z));
+                m_XPositions.Add(Mathf.RoundToInt(stoneHitManager.transform.position.x));
+                m_ZPositions.Add(Mathf.RoundToInt(stoneHitManager.transform.position.z));
             }
 
-            xPositions.Sort();
-            zPositions.Sort();
+            m_XPositions.Sort();
+            m_ZPositions.Sort();
 
-            bool areStonesInARowInXAxis = (xPositions[0] == xPositions[2] && zPositions[1] == zPositions[0] + 1 && zPositions[2] == zPositions[1] + 1);
-            bool areStonesInARowInZAxis = (zPositions[0] == zPositions[2] && xPositions[1] == xPositions[0] + 1 && xPositions[2] == xPositions[1] + 1);
+            bool areStonesInARowInXAxis = (m_XPositions[0] == m_XPositions[2] && m_ZPositions[1] == m_ZPositions[0] + 1 && m_ZPositions[2] == m_ZPositions[1] + 1);
+            bool areStonesInARowInZAxis = (m_ZPositions[0] == m_ZPositions[2] && m_XPositions[1] == m_XPositions[0] + 1 && m_XPositions[2] == m_XPositions[1] + 1);
 
             return (areStonesInARowInXAxis || areStonesInARowInZAxis);
         }
 
         IEnumerator StonesComeTogetherFX()
         {
-            centralPosition = new Vector3(xPositions[1], stonesTogetherHeight, zPositions[1]);
+            m_CentralPosition = new Vector3(m_XPositions[1], m_StonesTogetherHeight, m_ZPositions[1]);
 
-            foreach (StoneHitManager stoneHitManager in specialStones)
+            foreach (StoneHitManager stoneHitManager in m_KeyStones)
             {
                 stoneHitManager.GetComponent<Collider>().enabled = false;
-                stoneHitManager.transform.DOMove(stoneHitManager.transform.position + stonesTogetherHeight * Vector3.up,
-                            timeToStonesTogetherFX / 2)
+                stoneHitManager.transform.DOMove(stoneHitManager.transform.position + m_StonesTogetherHeight * Vector3.up,
+                            m_TimeToStonesTogetherFX / 2)
                             .SetEase(Ease.OutCirc);
             }
-            yield return new WaitForSeconds(timeToStonesTogetherFX / 2);
+            yield return new WaitForSeconds(m_TimeToStonesTogetherFX / 2);
 
-            foreach (StoneHitManager stoneHitManager in specialStones)
+            foreach (StoneHitManager stoneHitManager in m_KeyStones)
             {
-                stoneHitManager.transform.DOMove(centralPosition,
-                            timeToStonesTogetherFX / 2)
+                stoneHitManager.transform.DOMove(m_CentralPosition,
+                            m_TimeToStonesTogetherFX / 2)
                             .SetEase(Ease.OutCirc);
             }
-            yield return new WaitForSeconds(timeToStonesTogetherFX / 2);
+            yield return new WaitForSeconds(m_TimeToStonesTogetherFX / 2);
 
-            OnKeyStonesAligned?.Invoke(centralPosition);
-            DestroyStones();
+            OnKeyStonesAligned?.Invoke(m_CentralPosition);
+            HideStones();
         }
 
-        private void DestroyStones()
+        private void HideStones()
         {
-            foreach (StoneHitManager stoneHitManager in specialStones)
+            foreach (StoneHitManager keyStone in m_KeyStones)
             {
-                Destroy(stoneHitManager.gameObject);
+                PooledStone pooledStone = keyStone.gameObject.GetComponent<PooledStone>();
+                Assert.IsNotNull(keyStone, "ERROR: some keyStone has no PooledStone");
+                pooledStone.Release();
             }
         }
 
-        public void SetKeyStones(List<GameObject> keyStones)
+        public void SetKeyStones(List<PooledStone> keyStones)
         {
-            foreach (GameObject keyStone in keyStones)
+            Debug.Log("KeyStoneManager.SetKeyStones");
+            foreach (PooledStone keyStone in keyStones)
             {
                 StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
-                specialStones.Add(stoneHit);
+                m_KeyStones.Add(stoneHit);
                 Assert.IsNotNull(keyStone, "ERROR: some keyStone has no StoneHitManager");
                 stoneHit.OnStoneStop += HandleOnStoneStop;
             }

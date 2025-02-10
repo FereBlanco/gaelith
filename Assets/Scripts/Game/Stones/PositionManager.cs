@@ -15,6 +15,8 @@ public class PositionManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("PositionManager Awake");
+                
         m_InitialFreePositions = new List<Vector3>();
         m_CurrentFreePositions = new List<Vector3>();
 

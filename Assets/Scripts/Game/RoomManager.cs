@@ -2,6 +2,7 @@ using UnityEngine.Assertions;
 using UnityEngine;
 using Scripts.Game.Player;
 using Scripts.Game.Stones;
+using System;
 
 public class RoomManager : MonoBehaviour
 {
@@ -11,15 +12,19 @@ public class RoomManager : MonoBehaviour
     [SerializeField] StoneManager m_StoneManager;
 
     private void Awake() {
+        Debug.Log("RoomManager Awake");
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
         Assert.IsNotNull(m_PortalKeyPrefab, "ERROR: m_PortalKeyPrefab not set in RoomManager");
         Assert.IsNotNull(m_PortalDoorGO, "ERROR: m_PortalDoor not set in RoomManager");
         Assert.IsNotNull(m_StoneManager, "ERROR: m_StoneManager not set in RoomManager");
 
-        m_StoneManager.KeyStoneManager.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
-
         Collectible portalDoorCollectible = m_PortalDoorGO.GetComponent<Collectible>();
         portalDoorCollectible.OnCollectibleCollected += OnCollectibleCollectedCallback;        
+    }
+
+    private void Start()
+    {
+        //m_StoneManager.KeyStoneManager.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
     }
 
     private void OnKeyStonesAlignedCallback(Vector3 centralPosition)

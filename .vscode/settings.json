@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "workspace-gaelith.sln"
+    "dotnet.defaultSolution": "Gaelith.sln"
 }

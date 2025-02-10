@@ -1,2 +1,6 @@
-[ ] Refactor player: PlayerInput / PlayerMovement / PlayerSquaresInfo
 [ ] Refactor RoomManager
+
+[ ] Problem with the KeyStoneManager
+    It goes from KeyStoneManager to StoneManager, and from StoneManager to RoomManager
+    Probably there is a better way to populate it
+    m_StoneManager.KeyStoneManager.OnKeyStonesAligned += OnKeyStonesAlignedCallback;

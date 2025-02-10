@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6129064674066822177}
   - component: {fileID: 5677763660127439724}
   - component: {fileID: 1657674325512361273}
+  - component: {fileID: 1807736563472669740}
   m_Layer: 0
   m_Name: DynamicStone
   m_TagString: Untagged
@@ -113,6 +114,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpecial: 0
   ease: 9
+--- !u!114 &1807736563472669740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803910916614685379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8a848c05857e54a8ac5be919b101d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5697716937320099546
 PrefabInstance:
   m_ObjectHideFlags: 0
