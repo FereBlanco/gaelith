@@ -7,16 +7,17 @@ using System;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] Player m_Player;
-    [SerializeField] GameObject m_PortalKeyPrefab;
+    [SerializeField] GameObject m_PortalKey;
     [SerializeField] GameObject m_PortalDoorGO;
     [SerializeField] StoneManager m_StoneManager;
 
     private void Awake() {
-        Debug.Log("RoomManager Awake");
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
-        Assert.IsNotNull(m_PortalKeyPrefab, "ERROR: m_PortalKeyPrefab not set in RoomManager");
+        Assert.IsNotNull(m_PortalKey, "ERROR: m_PortalKeyPrefab not set in RoomManager");
         Assert.IsNotNull(m_PortalDoorGO, "ERROR: m_PortalDoor not set in RoomManager");
         Assert.IsNotNull(m_StoneManager, "ERROR: m_StoneManager not set in RoomManager");
+
+        m_PortalKey.SetActive(false);
 
         Collectible portalDoorCollectible = m_PortalDoorGO.GetComponent<Collectible>();
         portalDoorCollectible.OnCollectibleCollected += OnCollectibleCollectedCallback;        
@@ -24,14 +25,16 @@ public class RoomManager : MonoBehaviour
 
     private void Start()
     {
-        //m_StoneManager.KeyStoneManager.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
+        m_StoneManager.KeyStoneManager.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
     }
 
     private void OnKeyStonesAlignedCallback(Vector3 centralPosition)
     {
-        GameObject portalKey = Instantiate(m_PortalKeyPrefab, centralPosition, Quaternion.identity);
+        m_PortalKey.transform.position = centralPosition;
+        m_PortalKey.transform.rotation = Quaternion.identity;
+        m_PortalKey.SetActive(true);
         
-        Collectible portalKeyCollectible = portalKey.AddComponent<Collectible>();
+        Collectible portalKeyCollectible = m_PortalKey.AddComponent<Collectible>();
         portalKeyCollectible.OnCollectibleCollected += OnCollectibleCollectedCallback;
     }
 
@@ -42,7 +45,7 @@ public class RoomManager : MonoBehaviour
         if (transform.CompareTag(Constants.TAG_PORTAL_KEY))
         {
             collectible.OnCollectibleCollected -= OnCollectibleCollectedCallback;
-            Destroy(transform.gameObject);
+            m_PortalKey.SetActive(false);
 
             PortalDoor portalDoor = m_PortalDoorGO.GetComponent<PortalDoor>();
             portalDoor.OpenPortalDoor();

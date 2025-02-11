@@ -5,8 +5,8 @@ using UnityEngine;
 public class PositionManager : MonoBehaviour
 {
     [Header("Board Size")]
-    [SerializeField] int m_xMax = 2;
-    [SerializeField] int m_zMax = 2;
+    [SerializeField] int m_xMax = 7;
+    [SerializeField] int m_zMax = 7;
 
     [Header("Ignored Game Objects Position")]
     [SerializeField] GameObject[] m_IgnoreGameObjectsPosition;
@@ -15,8 +15,6 @@ public class PositionManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("PositionManager Awake");
-                
         m_InitialFreePositions = new List<Vector3>();
         m_CurrentFreePositions = new List<Vector3>();
 
@@ -65,10 +63,16 @@ public class PositionManager : MonoBehaviour
         return m_CurrentFreePositions.Count > 0;
     }
 
-    public Vector3 GetRandomFreePosition()
+    public Vector3 GetRandomFreePosition(bool isCentered)
     {
-        int randomIndex = UnityEngine.Random.Range(0, m_CurrentFreePositions.Count);
-        Vector3 randomPosition = m_CurrentFreePositions[randomIndex];
+        int randomIndex;
+        Vector3 randomPosition;
+        do
+        {
+            randomIndex = UnityEngine.Random.Range(0, m_CurrentFreePositions.Count);
+            randomPosition = m_CurrentFreePositions[randomIndex];
+        } while (isCentered && (randomPosition.x == 1 || randomPosition.x == m_xMax || randomPosition.z == 1 || randomPosition.z == m_zMax));
+
         m_CurrentFreePositions.RemoveAt(randomIndex);
 
         return randomPosition;

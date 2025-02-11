@@ -11832,7 +11832,7 @@ GameObject:
   - component: {fileID: 4599933066113706767}
   - component: {fileID: 2648389217934406533}
   m_Layer: 0
-  m_Name: Floor_tEMP
+  m_Name: Floor_7x7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

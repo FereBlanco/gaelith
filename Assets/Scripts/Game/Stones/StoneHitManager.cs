@@ -13,7 +13,6 @@ namespace Scripts.Game.Stones
 
         public void Hit(Transform hitterTransform)
         {
-            Debug.Log("Hit");
             RaycastHit limitHit;
             if (Physics.Raycast(transform.position + Constants.SELF_RAYCAST_ORIGIN, transform.TransformDirection(hitterTransform.forward), out limitHit, Mathf.Infinity))
             {
@@ -33,7 +32,6 @@ namespace Scripts.Game.Stones
 
         private void LaunchOnStoneStopEvent()
         {
-            Debug.Log("LaunchOnStoneStopEvent");
             OnStoneStop?.Invoke(isSpecial);
         }
     }

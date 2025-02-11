@@ -21,9 +21,10 @@ namespace Scripts.Game.Stones
         public event Action<Vector3> OnKeyStonesAligned;
 
         private void Awake() {
-            Debug.Log("KeyStoneManager Awake");
             m_XPositions = new List<int>();
             m_ZPositions = new List<int>();
+
+            m_KeyStones = new List<StoneHitManager>();
         }
 
         private void HandleOnStoneStop(bool isSpecial)
@@ -91,7 +92,6 @@ namespace Scripts.Game.Stones
 
         public void SetKeyStones(List<PooledStone> keyStones)
         {
-            Debug.Log("KeyStoneManager.SetKeyStones");
             foreach (PooledStone keyStone in keyStones)
             {
                 StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();

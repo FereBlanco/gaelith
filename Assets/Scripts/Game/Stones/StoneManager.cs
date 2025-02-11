@@ -29,7 +29,6 @@ public class StoneManager : MonoBehaviour
 
 
     private void Awake() {
-        Debug.Log("StoneManager Awake");
         m_Stones = new List<PooledStone>();
         m_KeyStones = new List<PooledStone>();
         m_DynamicStones = new List<PooledStone>();
@@ -41,56 +40,41 @@ public class StoneManager : MonoBehaviour
 
     private void Start() {
         CreateStones();
-        m_KeyStoneManager.SetKeyStones(m_KeyStones);
     }
 
     private void CreateStones()
     {
-        Debug.Log("StoneManager CreateStones");
-
-        m_KeyStones = CreateStones(m_KeyStonesNumber, m_KeyStonesPool);
+        m_KeyStones = CreateStones(m_KeyStonesNumber, m_KeyStonesPool, true);
         m_Stones.AddRange(m_KeyStones);
         KeyStoneManager.SetKeyStones(m_KeyStones);
 
-        m_DynamicStones = CreateStones(m_DynamicStonesNumber, m_DynamicStonesPool);
+        m_DynamicStones = CreateStones(m_DynamicStonesNumber, m_DynamicStonesPool, true);
         m_Stones.AddRange(m_DynamicStones);
 
-        m_StaticStones = CreateStones(m_StaticStonesNumber, m_StaticStonesPool);
+        m_StaticStones = CreateStones(m_StaticStonesNumber, m_StaticStonesPool, false);
         m_Stones.AddRange(m_StaticStones);
     }
 
-    private List<PooledStone> CreateStones(int stonesNumber, StonePool stonePool)
+    private List<PooledStone> CreateStones(int stonesNumber, StonePool stonePool, bool isCentered = false)
     {
-        Debug.Log("StoneManager CreateStones: " + stonePool.name);
         List<PooledStone> stoneList = new List<PooledStone>();
 
-        Debug.Log("StoneManager CreateStones 1");
         for (int i = 1; i <= stonesNumber; i++)
         {
-            Debug.Log("StoneManager CreateStones 2");
             if (m_PositionManager.IsAnyFreePosition())
             {
-                Debug.Log("StoneManager CreateStones 3");
-                Vector3 newFreeRandomPosition = m_PositionManager.GetRandomFreePosition();
-                Debug.Log("StoneManager CreateStones 4");
+                Vector3 newFreeRandomPosition = m_PositionManager.GetRandomFreePosition(isCentered);
                 PooledStone newStone = stonePool.GetPooledStone();
-                Debug.Log("StoneManager CreateStones 5");
                 newStone.transform.position = newFreeRandomPosition;
-                Debug.Log("StoneManager CreateStones 6");
                 newStone.transform.rotation = Quaternion.identity;
-                Debug.Log("StoneManager CreateStones 7");
                 newStone.transform.parent = transform;
-                Debug.Log("StoneManager CreateStones 8");
                 stoneList.Add(newStone);
-                Debug.Log("StoneManager CreateStones 9");
             }
             else
             {
                 Debug.Log("ERROR: No more free positions to create stones");
             }
         }
-        Debug.Log("StoneManager CreateStones 10");
-
         return stoneList;
     }
 
