@@ -307,7 +307,7 @@ MonoBehaviour:
   m_zMax: 9
   m_IgnoreGameObjectsPosition:
   - {fileID: 50895349}
-  - {fileID: 0}
+  - {fileID: 71147855}
 --- !u!114 &488178856
 MonoBehaviour:
   m_ObjectHideFlags: 0
