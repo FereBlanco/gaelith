@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PositionManager : MonoBehaviour
 {
@@ -9,12 +10,22 @@ public class PositionManager : MonoBehaviour
     [SerializeField] int m_zMax = 7;
 
     [Header("Ignored Game Objects Position")]
-    [SerializeField] GameObject[] m_IgnoreGameObjectsPosition;
+    [SerializeField] private Transform[] m_IgnoreGameObjectsPosition;
     List<Vector3> m_InitialFreePositions;
     List<Vector3> m_CurrentFreePositions;
 
     private void Awake()
     {
+        Assert.IsNotNull(m_IgnoreGameObjectsPosition, "ERROR: m_IgnoreGameObjectsPosition not set in PositionManager");
+
+        foreach (Transform ignoreGameObjectPosition in m_IgnoreGameObjectsPosition)
+        {
+            if (null == ignoreGameObjectPosition)
+            {
+                throw new Exception("ERROR: m_IgnoreGameObjectsPosition contains null elements in PositionManager");
+            }
+        }
+
         m_InitialFreePositions = new List<Vector3>();
         m_CurrentFreePositions = new List<Vector3>();
 
@@ -30,10 +41,10 @@ public class PositionManager : MonoBehaviour
             {
                 bool ignore = false;
 
-                foreach (GameObject ignoreGameObjectPosition in m_IgnoreGameObjectsPosition)
+                foreach (Transform ignoreGameObjectPosition in m_IgnoreGameObjectsPosition)
                 {
-                    if (x == Mathf.RoundToInt(ignoreGameObjectPosition.transform.position.x) &&
-                        z == Mathf.RoundToInt(ignoreGameObjectPosition.transform.position.z))
+                    if (x == Mathf.RoundToInt(ignoreGameObjectPosition.position.x) &&
+                        z == Mathf.RoundToInt(ignoreGameObjectPosition.position.z))
                     {
                         ignore = true;
                         break;
