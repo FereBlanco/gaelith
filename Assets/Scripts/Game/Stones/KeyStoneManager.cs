@@ -18,8 +18,6 @@ namespace Scripts.Game.Stones
         private float m_TimeToStonesTogetherFX = 0.5f;
         private float m_StonesTogetherHeight = 2.0f;
 
-        public event Action<Vector3> OnKeyStonesAligned;
-
         private void Awake() {
             m_XPositions = new List<int>();
             m_ZPositions = new List<int>();
@@ -76,7 +74,7 @@ namespace Scripts.Game.Stones
             }
             yield return new WaitForSeconds(m_TimeToStonesTogetherFX / 2);
 
-            OnKeyStonesAligned?.Invoke(m_CentralPosition);
+            EventHandler.RaiseOnKeyStonesAligned(m_CentralPosition);
             HideStones();
         }
 

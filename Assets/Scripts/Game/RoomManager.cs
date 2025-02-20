@@ -20,22 +20,23 @@ public class RoomManager : MonoBehaviour
         m_PortalKey.SetActive(false);
 
         Collectible portalDoorCollectible = m_PortalDoorGO.GetComponent<Collectible>();
-        portalDoorCollectible.OnCollectibleCollected += OnCollectibleCollectedCallback;        
+        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;        
     }
 
     private void Start()
     {
-        m_StoneManager.KeyStoneManager.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
+        EventHandler.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
     }
 
     private void OnKeyStonesAlignedCallback(Vector3 centralPosition)
     {
+        EventHandler.OnKeyStonesAligned -= OnKeyStonesAlignedCallback;
+
         m_PortalKey.transform.position = centralPosition;
         m_PortalKey.transform.rotation = Quaternion.identity;
         m_PortalKey.SetActive(true);
         
         Collectible portalKeyCollectible = m_PortalKey.AddComponent<Collectible>();
-        portalKeyCollectible.OnCollectibleCollected += OnCollectibleCollectedCallback;
     }
 
     private void OnCollectibleCollectedCallback(Transform transform)
@@ -44,7 +45,7 @@ public class RoomManager : MonoBehaviour
 
         if (transform.CompareTag(Constants.TAG_PORTAL_KEY))
         {
-            collectible.OnCollectibleCollected -= OnCollectibleCollectedCallback;
+            // EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;
             m_PortalKey.SetActive(false);
 
             PortalDoor portalDoor = m_PortalDoorGO.GetComponent<PortalDoor>();
@@ -53,7 +54,7 @@ public class RoomManager : MonoBehaviour
 
         if (transform.CompareTag(Constants.TAG_PORTAL_DOOR))
         {
-            collectible.OnCollectibleCollected -= OnCollectibleCollectedCallback;
+            // EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;
             m_Player.m_GameCompleted = true;
         }
     }

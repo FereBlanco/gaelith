@@ -5,8 +5,6 @@ using UnityEngine.Assertions;
 
 public class WorldManager : MonoBehaviour
 {
-    // private MenuInput m_MenuInput;
-
     private void Awake()
     {
         EventHandler.OnMenuReset += OnMenuResetCallback;
