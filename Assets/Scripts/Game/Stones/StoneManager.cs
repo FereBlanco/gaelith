@@ -4,8 +4,6 @@ using Scripts.Game.Stones;
 using Scripts.Game.Stones.StonePool;
 using UnityEngine;
 
-[RequireComponent(typeof(PositionManager))]
-[RequireComponent(typeof(KeyStoneManager))]
 public class StoneManager : MonoBehaviour
 {
     [Header("Number of Stones")]
@@ -29,13 +27,15 @@ public class StoneManager : MonoBehaviour
 
 
     private void Awake() {
+        m_PositionManager = GetComponent<PositionManager>();
+        m_KeyStoneManager = GetComponent<KeyStoneManager>();
+        Assert.IsNotNull(m_PositionManager, "ERROR: m_PositionManager not set in StoneManager");
+        Assert.IsNotNull(m_KeyStoneManager, "ERROR: m_KeyStoneManager not set in StoneManager");
+
         m_Stones = new List<PooledStone>();
         m_KeyStones = new List<PooledStone>();
         m_DynamicStones = new List<PooledStone>();
         m_StaticStones = new List<PooledStone>();
-
-        m_PositionManager = GetComponent<PositionManager>();
-        m_KeyStoneManager = GetComponent<KeyStoneManager>();
     }
 
     private void Start() {
