@@ -18,7 +18,6 @@ public class WorldManager : MonoBehaviour
 
     private void OnMenuQuitCallback()
     {
-        Debug.Log("QUIT!!!");
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else

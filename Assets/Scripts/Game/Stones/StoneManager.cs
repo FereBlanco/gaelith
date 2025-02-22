@@ -26,12 +26,18 @@ public class StoneManager : MonoBehaviour
     private List<PooledStone> m_StaticStones;
 
 
-    private void Awake() {
+    private void Awake()
+    {
         m_PositionManager = GetComponent<PositionManager>();
         m_KeyStoneManager = GetComponent<KeyStoneManager>();
         Assert.IsNotNull(m_PositionManager, "ERROR: m_PositionManager not set in StoneManager");
         Assert.IsNotNull(m_KeyStoneManager, "ERROR: m_KeyStoneManager not set in StoneManager");
 
+        IntiializeData();
+    }
+
+    private void IntiializeData()
+    {
         m_Stones = new List<PooledStone>();
         m_KeyStones = new List<PooledStone>();
         m_DynamicStones = new List<PooledStone>();
@@ -46,7 +52,7 @@ public class StoneManager : MonoBehaviour
     {
         m_KeyStones = CreateStones(m_KeyStonesNumber, m_KeyStonesPool, true);
         m_Stones.AddRange(m_KeyStones);
-        KeyStoneManager.SetKeyStones(m_KeyStones);
+        KeyStoneManager.Initialize(m_KeyStones);
 
         m_DynamicStones = CreateStones(m_DynamicStonesNumber, m_DynamicStonesPool, true);
         m_Stones.AddRange(m_DynamicStones);
