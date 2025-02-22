@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
-using Scripts.Game.Stones.StonePool;
-using Unity.VisualScripting;
+using Scripts.Game.Stones.ObjectPool;
 
 namespace Scripts.Game.Stones
 {
@@ -19,7 +17,7 @@ namespace Scripts.Game.Stones
         private float m_TimeToStonesTogetherFX = 0.5f;
         private float m_StonesTogetherHeight = 2.0f;
 
-        // Unity Methods
+        // MonoBehaviour Methods
         private void Awake() {
             m_XPositions = new List<int>();
             m_ZPositions = new List<int>();
@@ -41,7 +39,7 @@ namespace Scripts.Game.Stones
             }
         }
 
-        private void Reset()
+        public void Reset()
         {
             foreach (PooledStone keyStone in m_KeyStones)
             {

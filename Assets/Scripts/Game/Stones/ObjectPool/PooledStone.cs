@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Game.Stones.StonePool
+namespace Scripts.Game.Stones.ObjectPool
 {
     public class PooledStone : MonoBehaviour
     {

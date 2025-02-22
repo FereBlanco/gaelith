@@ -1,7 +1,4 @@
-using Scripts.Game.Menu;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 public class WorldManager : MonoBehaviour
 {

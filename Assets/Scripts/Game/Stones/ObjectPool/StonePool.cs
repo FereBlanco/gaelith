@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Scripts.Game.Stones.StonePool
+namespace Scripts.Game.Stones.ObjectPool
 {
     public class StonePool : MonoBehaviour
     {

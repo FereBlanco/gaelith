@@ -29,11 +29,11 @@ public class PositionManager : MonoBehaviour
         m_InitialFreePositions = new List<Vector3>();
         m_CurrentFreePositions = new List<Vector3>();
 
-        InitialiazeFreePositions();
-        ResetFreePositions();
+        Initialiaze();
+        Reset();
     }
 
-    private void InitialiazeFreePositions()
+    private void Initialiaze()
     {
         for (int x = 1; x <= m_xMax; x++)
         {
@@ -60,7 +60,7 @@ public class PositionManager : MonoBehaviour
         }
     }
 
-    public void ResetFreePositions()
+    public void Reset()
     {
         m_CurrentFreePositions.Clear();
         foreach (Vector3 initialFreePosition in m_InitialFreePositions)
@@ -69,6 +69,7 @@ public class PositionManager : MonoBehaviour
         }
     }
 
+    // Logic
     public bool IsAnyFreePosition()
     {
         return m_CurrentFreePositions.Count > 0;
