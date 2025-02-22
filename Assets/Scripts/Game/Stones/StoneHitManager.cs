@@ -5,8 +5,6 @@ namespace Scripts.Game.Stones
 {
     public class StoneHitManager : MonoBehaviour
     {
-        public delegate void StoneStopEventHandler(bool isSpecial);
-        public event StoneStopEventHandler OnStoneStop;
         public bool isSpecial = false;
 
         public DG.Tweening.Ease ease;
@@ -32,7 +30,7 @@ namespace Scripts.Game.Stones
 
         private void LaunchOnStoneStopEvent()
         {
-            OnStoneStop?.Invoke(isSpecial);
+            EventHandler.RaiseOnStoneStop(isSpecial);
         }
     }
 }

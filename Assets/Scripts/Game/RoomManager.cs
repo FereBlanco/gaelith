@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] GameObject m_PortalDoorGO;
     [SerializeField] StoneManager m_StoneManager;
 
+    // MonoBehaviour Methods
     private void Awake() {
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
         Assert.IsNotNull(m_PortalKey, "ERROR: m_PortalKeyPrefab not set in RoomManager");
@@ -24,12 +25,13 @@ public class RoomManager : MonoBehaviour
 
     private void Start()
     {
-        EventHandler.OnKeyStonesAligned += OnKeyStonesAlignedCallback;
+        EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback;
     }
 
+    // Callbacks
     private void OnKeyStonesAlignedCallback(Vector3 centralPosition)
     {
-        EventHandler.OnKeyStonesAligned -= OnKeyStonesAlignedCallback;
+        EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
 
         m_PortalKey.transform.position = centralPosition;
         m_PortalKey.transform.rotation = Quaternion.identity;

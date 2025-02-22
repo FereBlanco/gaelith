@@ -35,7 +35,7 @@ namespace Scripts.Game.Stones
                 m_KeyStones.Add(keyStone);
                 StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
                 Assert.IsNotNull(stoneHit, "ERROR: some keyStone has no StoneHitManager in class KeyStoneManager");
-                stoneHit.OnStoneStop += HandleOnStoneStop;
+                EventHandler.OnStoneStop += HandleOnStoneStop;
             }
         }
 
@@ -46,7 +46,7 @@ namespace Scripts.Game.Stones
                 StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
                 if (null != stoneHit)
                 {
-                    stoneHit.OnStoneStop -= HandleOnStoneStop;
+                    EventHandler.OnStoneStop -= HandleOnStoneStop;
                 }
                 keyStone.Release();
             }
@@ -107,7 +107,7 @@ namespace Scripts.Game.Stones
             }
             yield return new WaitForSeconds((m_TimeToStonesTogetherFX / 2));
 
-            EventHandler.RaiseOnKeyStonesAligned(m_CentralPosition);
+            EventHandler.RaiseOnKeyStonesAlign(m_CentralPosition);
             Reset();
         }
     }

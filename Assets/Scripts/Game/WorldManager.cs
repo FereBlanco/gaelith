@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
+    // MonoBehaviour Methods
     private void Awake()
     {
         EventHandler.OnMenuReset += OnMenuResetCallback;
         EventHandler.OnMenuQuit += OnMenuQuitCallback;
     }
 
+    // Callbacks
     public void OnMenuResetCallback()
     {
         Debug.Log("RESET!!!");

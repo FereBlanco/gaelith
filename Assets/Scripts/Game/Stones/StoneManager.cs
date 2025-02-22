@@ -38,15 +38,14 @@ namespace Scripts.Game.Stones
             m_KeyStones = new List<PooledStone>();
             m_DynamicStones = new List<PooledStone>();
             m_StaticStones = new List<PooledStone>();
-            Intialize();
         }
 
         private void Start() {
-            Intialize();
+            Initialize();
         }
 
         // Initialize & Reset
-        private void Intialize()
+        private void Initialize()
         {
             m_KeyStones = CreateStones(m_KeyStonesNumber, m_KeyStonesPool, true);
             m_Stones.AddRange(m_KeyStones);

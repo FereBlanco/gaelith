@@ -11,7 +11,8 @@ public class EventHandler : MonoBehaviour
     public static event Action OnMenuQuit;
 
     // Stone Events
-    public static event Action<Vector3> OnKeyStonesAligned;
+    public static event Action<bool> OnStoneStop;
+    public static event Action<Vector3> OnKeyStonesAlign;
 
     // Collectible Events
     public static event Action<Transform> OnCollectibleCollected;
@@ -29,8 +30,14 @@ public class EventHandler : MonoBehaviour
         }
     }
 
+    // Raise Menu Events
     public static void RaiseOnMenuReset() { OnMenuReset?.Invoke(); }
     public static void RaiseOnMenuQuit() { OnMenuQuit?.Invoke(); }    
-    public static void RaiseOnKeyStonesAligned(Vector3 vector) { OnKeyStonesAligned?.Invoke(vector); }    
+
+    // Stone Events
+    public static void RaiseOnStoneStop(bool isSpecial = false) { OnStoneStop?.Invoke(isSpecial); }    
+    public static void RaiseOnKeyStonesAlign(Vector3 vector) { OnKeyStonesAlign?.Invoke(vector); }   
+
+    // Collectible Events
     public static void RaiseOnCollectibleCollected(Transform transform) { OnCollectibleCollected?.Invoke(transform); }    
 }
