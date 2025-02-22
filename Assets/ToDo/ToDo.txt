@@ -7,3 +7,5 @@
 
 [ ] StoneController as MonoBehaviour that controls every stone
     Each stone typa as ScriptableObject
+
+[ ] Inputs and Sounds can already be ScriptableObjects
