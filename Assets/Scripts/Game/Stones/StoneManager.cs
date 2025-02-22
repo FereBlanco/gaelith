@@ -26,7 +26,7 @@ namespace Scripts.Game.Stones
         private List<PooledStone> m_DynamicStones;
         private List<PooledStone> m_StaticStones;
 
-        // MonoBehaviour Methods
+        // MonoBehaviour
         private void Awake()
         {
             m_PositionManager = GetComponent<PositionManager>();
@@ -40,12 +40,8 @@ namespace Scripts.Game.Stones
             m_StaticStones = new List<PooledStone>();
         }
 
-        private void Start() {
-            Initialize();
-        }
-
         // Initialize & Reset
-        private void Initialize()
+        internal void Initialize()
         {
             m_KeyStones = CreateStones(m_KeyStonesNumber, m_KeyStonesPool, true);
             m_Stones.AddRange(m_KeyStones);

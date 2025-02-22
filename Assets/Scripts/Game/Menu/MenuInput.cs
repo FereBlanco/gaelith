@@ -14,7 +14,7 @@ namespace Scripts.Game.Menu
         // Private members
 
 
-        // MonoBehaviour methods
+        // MonoBehaviour
         private void Update()
         {
             HandleMenuInput();

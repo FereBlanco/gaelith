@@ -2,30 +2,56 @@ using UnityEngine.Assertions;
 using UnityEngine;
 using Scripts.Game.Player;
 using Scripts.Game.Stones;
+using System.Collections;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] Player m_Player;
-    [SerializeField] GameObject m_PortalKey;
-    [SerializeField] GameObject m_PortalDoorGO;
-    [SerializeField] StoneManager m_StoneManager;
+    [SerializeField] private Player m_Player;
+    [SerializeField] private GameObject m_PortalKey;
+    [SerializeField] private GameObject m_PortalDoorGO;
+    private StoneManager m_StoneManager;
 
-    // MonoBehaviour Methods
+    // MonoBehaviour
     private void Awake() {
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
         Assert.IsNotNull(m_PortalKey, "ERROR: m_PortalKeyPrefab not set in RoomManager");
         Assert.IsNotNull(m_PortalDoorGO, "ERROR: m_PortalDoor not set in RoomManager");
-        Assert.IsNotNull(m_StoneManager, "ERROR: m_StoneManager not set in RoomManager");
 
-        m_PortalKey.SetActive(false);
+        m_StoneManager = GetComponentInChildren<StoneManager>();
+        Assert.IsNotNull(m_StoneManager, "ERROR: m_StoneManager not found in RoomManager children");
 
         Collectible portalDoorCollectible = m_PortalDoorGO.GetComponent<Collectible>();
-        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;        
+        Assert.IsNotNull(portalDoorCollectible, "ERROR: portalDoorCollectible not set in RoomManager");
+
+        Initialiaze();
     }
 
-    private void Start()
+    // Initialize & Reset
+    internal void Initialiaze()
     {
+        m_PortalKey.SetActive(false);
+        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;        
         EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback;
+    }
+
+    private void Reset() {
+        m_PortalKey.SetActive(false);
+        EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;        
+        EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
+    }
+
+    // Logic
+    internal void StartRoom()
+    {
+        m_StoneManager.Initialize();
+        m_Player.Initialize();
+    }
+
+    IEnumerator NextRoom()
+    {
+        yield return new WaitForSeconds(3.0f);
+        m_Player.Reset();
+        StartRoom();
     }
 
     // Callbacks
@@ -36,8 +62,6 @@ public class RoomManager : MonoBehaviour
         m_PortalKey.transform.position = centralPosition;
         m_PortalKey.transform.rotation = Quaternion.identity;
         m_PortalKey.SetActive(true);
-        
-        Collectible portalKeyCollectible = m_PortalKey.AddComponent<Collectible>();
     }
 
     private void OnCollectibleCollectedCallback(Transform transform)
@@ -46,7 +70,6 @@ public class RoomManager : MonoBehaviour
 
         if (transform.CompareTag(Constants.TAG_PORTAL_KEY))
         {
-            // EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;
             m_PortalKey.SetActive(false);
 
             PortalDoor portalDoor = m_PortalDoorGO.GetComponent<PortalDoor>();
@@ -55,8 +78,8 @@ public class RoomManager : MonoBehaviour
 
         if (transform.CompareTag(Constants.TAG_PORTAL_DOOR))
         {
-            // EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;
-            m_Player.m_GameCompleted = true;
+            m_Player.Celebrate();
+            StartCoroutine(NextRoom());
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Scripts.Game.Player
         // Private members
         PlayerMovement m_PlayerMovement;
 
-        // MonoBehaviour methods
+        // MonoBehaviour
         private void Awake() {
             Initialize();
         }
@@ -23,7 +23,7 @@ namespace Scripts.Game.Player
         // Public Methods
         public void Push(Vector3 inputPullVector)
         {
-            if (m_PlayerMovement.CanMove && inputPullVector != Vector3.zero)
+            if (m_PlayerMovement.MovementIsAllowed && inputPullVector != Vector3.zero)
             {
                 m_PlayerMovement.DontAllowMovement();
                 Sequence mySequence = DOTween.Sequence();

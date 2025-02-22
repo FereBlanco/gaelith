@@ -417,7 +417,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1459921182}
   m_Father: {fileID: 1650053791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
@@ -773,7 +774,6 @@ MonoBehaviour:
   m_Player: {fileID: 1679996047}
   m_PortalKey: {fileID: 71147855}
   m_PortalDoorGO: {fileID: 343123079}
-  m_StoneManager: {fileID: 488178854}
 --- !u!4 &1459921182
 Transform:
   m_ObjectHideFlags: 0
@@ -788,7 +788,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 488178853}
-  m_Father: {fileID: 1650053791}
+  m_Father: {fileID: 630988804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571365153
 GameObject:
@@ -855,9 +855,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 630988804}
   - {fileID: 540244453}
-  - {fileID: 1459921182}
+  - {fileID: 630988804}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1679996047 stripped

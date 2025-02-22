@@ -21,11 +21,6 @@ namespace Scripts.Game.Player
         [Tooltip("Use these keys to perform Player ACTIONS")]
         [SerializeField] private KeyCode m_PullKey = KeyCode.Space;
 
-        // [Header("Menu Options")]
-        // [Tooltip("Use these keys to select MENU options")]
-        // [SerializeField] private KeyCode m_ResetKey = KeyCode.R;
-        // [SerializeField] private KeyCode m_QuitKey = KeyCode.Q;
-
         // Private members
         private Vector3 m_InputMovementVector;
         private Vector3 m_InputRotationVector;
@@ -36,7 +31,7 @@ namespace Scripts.Game.Player
         public Vector3 InputRotationVector => m_InputRotationVector;
         public Vector3 InputPullVector => m_InputPullVector;
 
-        // MonoBehaviour methods
+        // MonoBehaviour
         private void Update()
         {
             HandleMovementInput();
@@ -44,7 +39,7 @@ namespace Scripts.Game.Player
             HandlePullInput();
         }
 
-        // Private Methods
+        // Logic
         private void HandleMovementInput()
         {
             m_InputMovementVector = Vector3.zero;

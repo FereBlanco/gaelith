@@ -11,17 +11,22 @@ namespace Scripts.Game.Player
     [RequireComponent(typeof(PlayerInput), typeof(PlayerMovement), typeof(PlayerAction))]
     public class Player : MonoBehaviour
     {
-        // Private members
-        PlayerInput m_PlayerInput;
-        PlayerMovement m_PlayerMovement;
-        PlayerAction m_PlayerAction;
+        private PlayerInput m_PlayerInput;
+        private PlayerMovement m_PlayerMovement;
+        private PlayerAction m_PlayerAction;
 
-        // Only for testing purposes
-        public bool m_GameCompleted = false;
+        private Transform m_InitialTransform;
 
-        // MonoBehaviour methods
+        private bool m_IsCelebrating = false;
+        public bool IsCelebrating { get => m_IsCelebrating; set => m_IsCelebrating = value; }
+
+        // MonoBehaviour
         private void Awake() {
-            Initialize();
+            m_PlayerInput = GetComponent<PlayerInput>();
+            m_PlayerMovement = GetComponent<PlayerMovement>();
+            m_PlayerAction = GetComponent<PlayerAction>();
+
+            m_InitialTransform = transform;
         }
 
         private void LateUpdate()
@@ -35,21 +40,37 @@ namespace Scripts.Game.Player
             Vector3 inputPullVector = m_PlayerInput.InputPullVector;
             m_PlayerAction.Push(inputPullVector);
 
-
-            // Only for testing purposes
-            if (true == m_GameCompleted)
+            if (true == IsCelebrating)
             {
-                m_PlayerMovement.DontAllowMovement();
                 transform.Rotate(Vector3.up, 250.0f * Time.deltaTime);
             }
         }
 
-        // Privatea Methods
-        private void Initialize()
+        // Initialize & Reset
+        public void Initialize()
         {
-            m_PlayerInput = GetComponent<PlayerInput>();
-            m_PlayerMovement = GetComponent<PlayerMovement>();
-            m_PlayerAction = GetComponent<PlayerAction>();
+            Debug.Log($"Player Initialize : {m_InitialTransform.position} / {m_InitialTransform.rotation}");
+            transform.position = m_InitialTransform.position;
+            transform.rotation = m_InitialTransform.rotation;
+            m_PlayerMovement.AllowMovement();
         }
+
+        public void SetInitialTransform(Transform transform)
+        {
+            m_InitialTransform = transform;
+        }
+
+        public void Reset()
+        {
+            m_PlayerMovement.DontAllowMovement();
+            IsCelebrating = false;
+        }
+
+        // Logic
+        public void Celebrate()
+        {
+            m_PlayerMovement.DontAllowMovement();
+            IsCelebrating = true;
+        }   
     }
 }

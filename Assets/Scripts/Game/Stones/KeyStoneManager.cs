@@ -17,7 +17,7 @@ namespace Scripts.Game.Stones
         private float m_TimeToStonesTogetherFX = 0.5f;
         private float m_StonesTogetherHeight = 2.0f;
 
-        // MonoBehaviour Methods
+        // MonoBehaviour
         private void Awake() {
             m_XPositions = new List<int>();
             m_ZPositions = new List<int>();

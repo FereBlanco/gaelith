@@ -16,7 +16,7 @@ namespace Scripts.Game.Stones
         List<Vector3> m_InitialFreePositions;
         List<Vector3> m_CurrentFreePositions;
 
-        // MonoBehaviour Methods
+        // MonoBehaviour
         private void Awake()
         {
             Assert.IsNotNull(m_IgnoreGameObjectsPosition, "ERROR: m_IgnoreGameObjectsPosition not set in PositionManager");

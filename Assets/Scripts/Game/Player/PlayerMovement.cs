@@ -15,18 +15,18 @@ namespace Scripts.Game.Player
         [SerializeField] private float rotateAngle = 90f;
 
         // Private members
-        private bool m_CanMove = true;
-        public bool CanMove => m_CanMove;
+        private bool m_MovementIsAllowed = false;
+        public bool MovementIsAllowed { get => m_MovementIsAllowed; }
 
-        // MonoBehaviour methods
+        // MonoBehaviour
         private void Awake() {
             Assert.IsTrue(System.Enum.IsDefined(typeof(DG.Tweening.Ease), ease), "ERROR: ease value is invalid!!!");
         }
 
-        // Public Methods
+        // Logic
         public void Move(Vector3 inputMovementVector)
         {
-            if (m_CanMove && inputMovementVector != Vector3.zero)
+            if (m_MovementIsAllowed && inputMovementVector != Vector3.zero)
             {
                 Vector3 nextTilePosition = transform.position + inputMovementVector;
 
@@ -42,7 +42,7 @@ namespace Scripts.Game.Player
 
         public void Rotate(Vector3 inputRotationVector)
         {
-            if (m_CanMove && inputRotationVector != Vector3.zero)
+            if (m_MovementIsAllowed && inputRotationVector != Vector3.zero)
             {
                 DontAllowMovement();
                 Vector3 newRotation = transform.rotation.eulerAngles + rotateAngle * inputRotationVector;
@@ -54,15 +54,14 @@ namespace Scripts.Game.Player
 
         public void AllowMovement()
         {
-            m_CanMove = true;
+            m_MovementIsAllowed = true;
         }
 
         public void DontAllowMovement()
         {
-            m_CanMove = false;
+            m_MovementIsAllowed = false;
         }
 
-        // Private Methods
         private bool IsNextTileWalkable(Vector3 nextTileDirection)
         {
             SquareInfo squareInfo = GetSquareInfo(nextTileDirection, 1.0f);

@@ -5,7 +5,7 @@ namespace Scripts.Game.Stones
 {
     public class StoneHitManager : MonoBehaviour
     {
-        public bool isSpecial = false;
+        [SerializeField] private bool isSpecial = false;
 
         public DG.Tweening.Ease ease;
 
