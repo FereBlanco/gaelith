@@ -32,6 +32,7 @@ namespace Scripts.Game.Stones
         {
             foreach (PooledStone keyStone in keyStones)
             {
+                keyStone.GetComponent<Collider>().enabled = true;
                 m_KeyStones.Add(keyStone);
                 StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
                 Assert.IsNotNull(stoneHit, "ERROR: some keyStone has no StoneHitManager in class KeyStoneManager");

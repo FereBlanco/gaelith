@@ -8,21 +8,25 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private Player m_Player;
     [SerializeField] private GameObject m_PortalKey;
-    [SerializeField] private GameObject m_PortalDoorGO;
+    [SerializeField] private PortalDoor m_PortalDoor;
     private StoneManager m_StoneManager;
 
     // MonoBehaviour
     private void Awake() {
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
         Assert.IsNotNull(m_PortalKey, "ERROR: m_PortalKeyPrefab not set in RoomManager");
-        Assert.IsNotNull(m_PortalDoorGO, "ERROR: m_PortalDoor not set in RoomManager");
+        Assert.IsNotNull(m_PortalDoor, "ERROR: m_PortalDoor not set in RoomManager");
 
         m_StoneManager = GetComponentInChildren<StoneManager>();
         Assert.IsNotNull(m_StoneManager, "ERROR: m_StoneManager not found in RoomManager children");
 
-        Collectible portalDoorCollectible = m_PortalDoorGO.GetComponent<Collectible>();
+        Collectible portalDoorCollectible = m_PortalDoor.GetComponent<Collectible>();
         Assert.IsNotNull(portalDoorCollectible, "ERROR: portalDoorCollectible not set in RoomManager");
 
+    }
+
+    public void Start()
+    {
         Initialiaze();
     }
 
@@ -30,6 +34,9 @@ public class RoomManager : MonoBehaviour
     internal void Initialiaze()
     {
         m_PortalKey.SetActive(false);
+        m_PortalDoor.ClosePortalDoor();
+        m_StoneManager.Initialize();
+        m_Player.Initialize();
         EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;        
         EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback;
     }
@@ -40,18 +47,11 @@ public class RoomManager : MonoBehaviour
         EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
     }
 
-    // Logic
-    internal void StartRoom()
-    {
-        m_StoneManager.Initialize();
-        m_Player.Initialize();
-    }
-
     IEnumerator NextRoom()
     {
+        Reset();
         yield return new WaitForSeconds(3.0f);
-        m_Player.Reset();
-        StartRoom();
+        Initialiaze();
     }
 
     // Callbacks
@@ -72,8 +72,7 @@ public class RoomManager : MonoBehaviour
         {
             m_PortalKey.SetActive(false);
 
-            PortalDoor portalDoor = m_PortalDoorGO.GetComponent<PortalDoor>();
-            portalDoor.OpenPortalDoor();
+            m_PortalDoor.OpenPortalDoor();
         }
 
         if (transform.CompareTag(Constants.TAG_PORTAL_DOOR))

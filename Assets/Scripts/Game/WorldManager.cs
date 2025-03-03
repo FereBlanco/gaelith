@@ -30,7 +30,8 @@ public class WorldManager : MonoBehaviour
     // Logic
     public void StartGame()
     {
-        m_RoomManager.StartRoom();
+        // m_RoomManager.StartRoom();
+        m_RoomManager.Initialiaze();
     }
 
     // Callbacks

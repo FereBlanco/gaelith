@@ -15,7 +15,8 @@ namespace Scripts.Game.Player
         private PlayerMovement m_PlayerMovement;
         private PlayerAction m_PlayerAction;
 
-        private Transform m_InitialTransform;
+        private Vector3 m_InitialPosition;
+        private Quaternion m_InitialRotation;
 
         private bool m_IsCelebrating = false;
         public bool IsCelebrating { get => m_IsCelebrating; set => m_IsCelebrating = value; }
@@ -26,7 +27,7 @@ namespace Scripts.Game.Player
             m_PlayerMovement = GetComponent<PlayerMovement>();
             m_PlayerAction = GetComponent<PlayerAction>();
 
-            m_InitialTransform = transform;
+            SetInitialTransform(this.transform);
         }
 
         private void LateUpdate()
@@ -49,21 +50,16 @@ namespace Scripts.Game.Player
         // Initialize & Reset
         public void Initialize()
         {
-            Debug.Log($"Player Initialize : {m_InitialTransform.position} / {m_InitialTransform.rotation}");
-            transform.position = m_InitialTransform.position;
-            transform.rotation = m_InitialTransform.rotation;
+            IsCelebrating = false;
+            transform.position = m_InitialPosition;
+            transform.rotation = m_InitialRotation;
             m_PlayerMovement.AllowMovement();
         }
 
-        public void SetInitialTransform(Transform transform)
+        public void SetInitialTransform(Transform newTransform)
         {
-            m_InitialTransform = transform;
-        }
-
-        public void Reset()
-        {
-            m_PlayerMovement.DontAllowMovement();
-            IsCelebrating = false;
+            m_InitialPosition = newTransform.position;
+            m_InitialRotation = newTransform.rotation;
         }
 
         // Logic

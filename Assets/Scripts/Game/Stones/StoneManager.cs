@@ -34,6 +34,10 @@ namespace Scripts.Game.Stones
             Assert.IsNotNull(m_PositionManager, "ERROR: m_PositionManager not set in StoneManager");
             Assert.IsNotNull(m_KeyStoneManager, "ERROR: m_KeyStoneManager not set in StoneManager");
 
+            Assert.IsNotNull(m_KeyStonesPool, "ERROR: m_KeyStonesPool not set in StoneManager");
+            Assert.IsNotNull(m_DynamicStonesPool, "ERROR: m_DynamicStonesPool not set in StoneManager");
+            Assert.IsNotNull(m_StaticStonesPool, "ERROR: m_StaticStonesPool not set in StoneManager");
+
             m_Stones = new List<PooledStone>();
             m_KeyStones = new List<PooledStone>();
             m_DynamicStones = new List<PooledStone>();
