@@ -43,14 +43,9 @@ public class PortalDoor : MonoBehaviour
         if (isDoorOpen)
         {
             isDoorOpen = false;
-            door.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), timeToOpenDoor)
-                .OnComplete(PortalDoorOpened);
+            portalSquareInfo.IsWalkable = false;
+            portalSquareInfo.IsCollectible = false;
+            door.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), timeToOpenDoor);
         }
-    }
-
-    private void PortalDoorClosed()
-    {
-        portalSquareInfo.IsWalkable = false;
-        portalSquareInfo.IsCollectible = false;
     }
 }

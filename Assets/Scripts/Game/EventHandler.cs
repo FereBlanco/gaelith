@@ -36,7 +36,10 @@ public class EventHandler : MonoBehaviour
 
     // Stone Events
     public static void RaiseOnStoneStop(bool isSpecial = false) { OnStoneStop?.Invoke(isSpecial); }    
-    public static void RaiseOnKeyStonesAlign(Vector3 vector) { OnKeyStonesAlign?.Invoke(vector); }   
+    public static void RaiseOnKeyStonesAlign(Vector3 vector) {
+        Debug.Log("RaiseOnKeyStonesAlign");
+        OnKeyStonesAlign?.Invoke(vector);
+    }   
 
     // Collectible Events
     public static void RaiseOnCollectibleCollected(Transform transform) { OnCollectibleCollected?.Invoke(transform); }    

@@ -25,6 +25,8 @@ namespace Scripts.Game.Stones
             m_KeyStones = new List<PooledStone>();
 
             m_AreStonesInARow = false;
+
+            EventHandler.OnStoneStop += HandleOnStoneStop;
         }
 
         // Initialize & Reset
@@ -36,7 +38,6 @@ namespace Scripts.Game.Stones
                 m_KeyStones.Add(keyStone);
                 StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
                 Assert.IsNotNull(stoneHit, "ERROR: some keyStone has no StoneHitManager in class KeyStoneManager");
-                EventHandler.OnStoneStop += HandleOnStoneStop;
             }
         }
 
@@ -44,11 +45,11 @@ namespace Scripts.Game.Stones
         {
             foreach (PooledStone keyStone in m_KeyStones)
             {
-                StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
-                if (null != stoneHit)
-                {
-                    EventHandler.OnStoneStop -= HandleOnStoneStop;
-                }
+                // StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
+                // if (null != stoneHit)
+                // {
+                //     EventHandler.OnStoneStop -= HandleOnStoneStop;
+                // }
                 keyStone.Release();
             }
 

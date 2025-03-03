@@ -14,6 +14,11 @@ public class WorldManager : MonoBehaviour
         Initialize();
     }
 
+    public void Start()
+    {
+        m_RoomManager.LoadRoom();
+    }
+
     // Initialize & Reset
     private void Initialize()
     {
@@ -27,18 +32,10 @@ public class WorldManager : MonoBehaviour
         EventHandler.OnMenuQuit -= OnMenuQuitCallback;
     }
 
-    // Logic
-    public void StartGame()
-    {
-        // m_RoomManager.StartRoom();
-        m_RoomManager.Initialiaze();
-    }
-
     // Callbacks
     public void OnMenuResetCallback()
     {
-        Debug.Log("RESET!!!");
-        StartGame();
+        m_RoomManager.LoadRoom();
     }
 
     private void OnMenuQuitCallback()

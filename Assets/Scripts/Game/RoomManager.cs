@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject m_PortalKey;
     [SerializeField] private PortalDoor m_PortalDoor;
     private StoneManager m_StoneManager;
+    bool isKeyStonesAlignSubscribed = false;
 
     // MonoBehaviour
     private void Awake() {
@@ -23,41 +24,49 @@ public class RoomManager : MonoBehaviour
         Collectible portalDoorCollectible = m_PortalDoor.GetComponent<Collectible>();
         Assert.IsNotNull(portalDoorCollectible, "ERROR: portalDoorCollectible not set in RoomManager");
 
-    }
-
-    public void Start()
-    {
-        Initialiaze();
+        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;
+        Initialize();
     }
 
     // Initialize & Reset
-    internal void Initialiaze()
+    private void Initialize()
     {
-        m_PortalKey.SetActive(false);
+        if (false == isKeyStonesAlignSubscribed)
+        {
+            Debug.Log("RoomManager.Initialize >> EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback");
+            EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback;
+            isKeyStonesAlignSubscribed = true;
+        }
+    }
+
+    // Logic
+    internal void LoadRoom()
+    {
         m_PortalDoor.ClosePortalDoor();
+        m_PortalKey.SetActive(false);
         m_StoneManager.Initialize();
         m_Player.Initialize();
-        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;        
-        EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback;
     }
 
-    private void Reset() {
-        m_PortalKey.SetActive(false);
-        EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;        
-        EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
-    }
-
-    IEnumerator NextRoom()
+    // Logic
+    public void NextRoom()
     {
-        Reset();
+        StartCoroutine(NextRoomSequence());
+    }
+
+    IEnumerator NextRoomSequence()
+    {
+        // Reset();
         yield return new WaitForSeconds(3.0f);
-        Initialiaze();
+        LoadRoom();
     }
 
     // Callbacks
     private void OnKeyStonesAlignedCallback(Vector3 centralPosition)
     {
-        EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
+        Debug.Log("RoomManager.OnKeyStonesAlignedCallback");
+        // EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
+        isKeyStonesAlignSubscribed = false;
 
         m_PortalKey.transform.position = centralPosition;
         m_PortalKey.transform.rotation = Quaternion.identity;
@@ -66,19 +75,16 @@ public class RoomManager : MonoBehaviour
 
     private void OnCollectibleCollectedCallback(Transform transform)
     {
-        Collectible collectible = transform.GetComponent<Collectible>();
-
         if (transform.CompareTag(Constants.TAG_PORTAL_KEY))
         {
             m_PortalKey.SetActive(false);
-
             m_PortalDoor.OpenPortalDoor();
         }
 
         if (transform.CompareTag(Constants.TAG_PORTAL_DOOR))
         {
             m_Player.Celebrate();
-            StartCoroutine(NextRoom());
+            NextRoom();
         }
     }
 }
