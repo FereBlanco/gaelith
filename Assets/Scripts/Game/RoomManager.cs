@@ -64,9 +64,20 @@ public class RoomManager : MonoBehaviour
 
     public void NextRoom()
     {
+        IncreaseStonesNumber();
+        StartCoroutine(ResetNextRoomSequence());
+    }
+
+    public void NextRoomFromMenu()
+    {
+        IncreaseStonesNumber();
+        StartCoroutine(ResetRoomSequence());
+    }
+
+    private void IncreaseStonesNumber()
+    {
         m_DynamicStonesNumber += 2;
         m_StaticStonesNumber += 1;
-        StartCoroutine(ResetNextRoomSequence());
     }
 
     IEnumerator ResetNextRoomSequence()

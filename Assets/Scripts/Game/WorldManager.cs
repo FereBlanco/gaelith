@@ -41,7 +41,7 @@ public class WorldManager : MonoBehaviour
     }
     public void OnMenuNextRoomCallback()
     {
-        m_RoomManager.NextRoom();
+        m_RoomManager.NextRoomFromMenu();
     }
 
     private void OnMenuQuitCallback()
