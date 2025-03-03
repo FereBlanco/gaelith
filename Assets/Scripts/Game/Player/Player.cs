@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Assertions;
+using DG.Tweening;
 
 namespace Scripts.Game.Player
 {
@@ -8,7 +10,6 @@ namespace Scripts.Game.Player
     /// Each component focuses on a specific aspect of the player's behavior (input handling, movement, action...).
     /// </summary>
 
-    [RequireComponent(typeof(PlayerInput), typeof(PlayerMovement), typeof(PlayerAction))]
     public class Player : MonoBehaviour
     {
         private PlayerInput m_PlayerInput;
@@ -26,6 +27,9 @@ namespace Scripts.Game.Player
             m_PlayerInput = GetComponent<PlayerInput>();
             m_PlayerMovement = GetComponent<PlayerMovement>();
             m_PlayerAction = GetComponent<PlayerAction>();
+            Assert.IsNotNull(m_PlayerInput, "ERROR: m_PlayerInput not found in Player class");
+            Assert.IsNotNull(m_PlayerMovement, "ERROR: m_PlayerMovement not found in Player class");
+            Assert.IsNotNull(m_PlayerAction, "ERROR: m_PlayerAction not found in Player class");
 
             SetInitialTransform(this.transform);
         }
@@ -53,20 +57,26 @@ namespace Scripts.Game.Player
             IsCelebrating = false;
             transform.position = m_InitialPosition;
             transform.rotation = m_InitialRotation;
+        }
+
+        public void AllowMovement()
+        {
             m_PlayerMovement.AllowMovement();
         }
 
         public void SetInitialTransform(Transform newTransform)
         {
-            m_InitialPosition = newTransform.position;
+            m_InitialPosition = new Vector3(newTransform.position.x, Constants.SKY_LEVEL, newTransform.position.z);
             m_InitialRotation = newTransform.rotation;
         }
 
         // Logic
         public void Celebrate()
         {
+            DOTween.Kill(transform);
             m_PlayerMovement.DontAllowMovement();
             IsCelebrating = true;
-        }   
+        }
+
     }
 }

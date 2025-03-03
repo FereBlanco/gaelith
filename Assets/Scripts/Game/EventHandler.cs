@@ -5,9 +5,11 @@ public class EventHandler : MonoBehaviour
 {
     private static EventHandler m_Instance;
     public static EventHandler Instance { get => m_Instance; }
+    public static Action OnMenuNext { get; internal set; }
 
     // Menu Events
     public static event Action OnMenuReset;
+    public static event Action OnMenuNextRoom;
     public static event Action OnMenuQuit;
 
     // Stone Events
@@ -32,14 +34,12 @@ public class EventHandler : MonoBehaviour
 
     // Raise Menu Events
     public static void RaiseOnMenuReset() { OnMenuReset?.Invoke(); }
+    public static void RaiseOnMenuNextRoom() { OnMenuNextRoom?.Invoke(); }
     public static void RaiseOnMenuQuit() { OnMenuQuit?.Invoke(); }    
 
     // Stone Events
     public static void RaiseOnStoneStop(bool isSpecial = false) { OnStoneStop?.Invoke(isSpecial); }    
-    public static void RaiseOnKeyStonesAlign(Vector3 vector) {
-        Debug.Log("RaiseOnKeyStonesAlign");
-        OnKeyStonesAlign?.Invoke(vector);
-    }   
+    public static void RaiseOnKeyStonesAlign(Vector3 vector) { OnKeyStonesAlign?.Invoke(vector); }   
 
     // Collectible Events
     public static void RaiseOnCollectibleCollected(Transform transform) { OnCollectibleCollected?.Invoke(transform); }    

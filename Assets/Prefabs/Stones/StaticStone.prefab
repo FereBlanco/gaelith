@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4229489823590016663}
   - component: {fileID: -4884039771447400963}
   - component: {fileID: 1460380648048744994}
+  - component: {fileID: -6465537611571773954}
   m_Layer: 0
   m_Name: StaticStone
   m_TagString: Untagged
@@ -109,6 +110,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c8a848c05857e54a8ac5be919b101d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6465537611571773954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6468225142126825064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d068acd71708844408f48624a5970feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7706083574637589870

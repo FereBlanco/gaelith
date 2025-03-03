@@ -1,0 +1,1 @@
+[ ] Player and StaticStone in the same tile at the begin of a room (not the first one)

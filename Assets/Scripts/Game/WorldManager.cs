@@ -23,19 +23,25 @@ public class WorldManager : MonoBehaviour
     private void Initialize()
     {
         EventHandler.OnMenuReset += OnMenuResetCallback;
+        EventHandler.OnMenuNextRoom += OnMenuNextRoomCallback;
         EventHandler.OnMenuQuit += OnMenuQuitCallback;
     }
     
     public void Reset()
     {
         EventHandler.OnMenuReset -= OnMenuResetCallback;
+        EventHandler.OnMenuNextRoom -= OnMenuNextRoomCallback;
         EventHandler.OnMenuQuit -= OnMenuQuitCallback;
     }
 
     // Callbacks
     public void OnMenuResetCallback()
     {
-        m_RoomManager.LoadRoom();
+        m_RoomManager.ResetRoom();
+    }
+    public void OnMenuNextRoomCallback()
+    {
+        m_RoomManager.NextRoom();
     }
 
     private void OnMenuQuitCallback()

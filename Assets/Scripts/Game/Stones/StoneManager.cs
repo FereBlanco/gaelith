@@ -7,10 +7,7 @@ namespace Scripts.Game.Stones
 {
     public class StoneManager : MonoBehaviour
     {
-        [Header("Number of Stones")]
-        [SerializeField] int m_KeyStonesNumber = 3;
-        [SerializeField] int m_DynamicStonesNumber = 8;
-        [SerializeField] int m_StaticStonesNumber = 4;
+
 
         [Header("Stone Pools")]
         [SerializeField] private StonePool m_KeyStonesPool;
@@ -45,16 +42,18 @@ namespace Scripts.Game.Stones
         }
 
         // Initialize & Reset
-        internal void Initialize()
+        public void Initialize(int keyStonesNumber, int dynamicStonesNumber, int staticStonesNumber)
         {
-            m_KeyStones = CreateStones(m_KeyStonesNumber, m_KeyStonesPool, true);
+            m_PositionManager.Initialize();
+
+            m_KeyStones = CreateStones(keyStonesNumber, m_KeyStonesPool, true);
             m_Stones.AddRange(m_KeyStones);
             KeyStoneManager.Initialize(m_KeyStones);
 
-            m_DynamicStones = CreateStones(m_DynamicStonesNumber, m_DynamicStonesPool, true);
+            m_DynamicStones = CreateStones(dynamicStonesNumber, m_DynamicStonesPool, true);
             m_Stones.AddRange(m_DynamicStones);
 
-            m_StaticStones = CreateStones(m_StaticStonesNumber, m_StaticStonesPool, false);
+            m_StaticStones = CreateStones(staticStonesNumber, m_StaticStonesPool, false);
             m_Stones.AddRange(m_StaticStones);
         }
 
@@ -95,6 +94,21 @@ namespace Scripts.Game.Stones
                 }
             }
             return stoneList;
+        }
+
+        public List<Transform> GetActiveStones()
+        {
+            List<Transform> activeStoneList = new List<Transform>();
+
+            foreach (PooledStone stone in m_Stones)
+            {
+                if (stone.gameObject.activeSelf)
+                {
+                    activeStoneList.Add(stone.transform);
+                }
+            }
+
+            return activeStoneList;
         }
     }
 }

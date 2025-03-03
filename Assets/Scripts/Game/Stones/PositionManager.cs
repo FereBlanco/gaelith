@@ -8,8 +8,8 @@ namespace Scripts.Game.Stones
     public class PositionManager : MonoBehaviour
     {
         [Header("Board Size")]
-        [SerializeField] int m_xMax = 7;
-        [SerializeField] int m_zMax = 7;
+        [SerializeField] int m_xMax = 9;
+        [SerializeField] int m_zMax = 9;
 
         [Header("Ignored Game Objects Position")]
         [SerializeField] private Transform[] m_IgnoreGameObjectsPosition;
@@ -31,12 +31,10 @@ namespace Scripts.Game.Stones
 
             m_InitialFreePositions = new List<Vector3>();
             m_CurrentFreePositions = new List<Vector3>();
-
-            Initialiaze();
         }
 
         // Initialize & Reset
-        private void Initialiaze()
+        public void Initialize()
         {
             Reset();
 
@@ -58,7 +56,7 @@ namespace Scripts.Game.Stones
 
                     if (!ignore)
                     {
-                        Vector3 newFreePosition = new Vector3(x, 0f, z);
+                        Vector3 newFreePosition = new Vector3(x, Constants.SKY_LEVEL, z);
                         m_InitialFreePositions.Add(newFreePosition);
                     }
                 }
