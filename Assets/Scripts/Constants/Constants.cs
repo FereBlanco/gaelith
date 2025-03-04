@@ -17,4 +17,6 @@ public static class Constants
     public static float FLY_TIME = 1.0f;
     public static float FALL_TIME = 1.0f;
     public static float CELEBRATION_TIME = 1.5f;
+    
+    public static string TEXT_ROOM_NUMBER = "Room: ";
 }

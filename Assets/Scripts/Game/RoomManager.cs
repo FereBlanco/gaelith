@@ -4,6 +4,7 @@ using Scripts.Game.Player;
 using Scripts.Game.Stones;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class RoomManager : MonoBehaviour
 {
@@ -22,11 +23,15 @@ public class RoomManager : MonoBehaviour
 
     bool isKeyStonesAlignSubscribed = false;
 
+    private int m_RoomNumber;
+    [SerializeField] private TMP_Text m_RoomNumberText;
+
     // MonoBehaviour
     private void Awake() {
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
         Assert.IsNotNull(m_PortalKey, "ERROR: m_PortalKeyPrefab not set in RoomManager");
         Assert.IsNotNull(m_PortalDoor, "ERROR: m_PortalDoor not set in RoomManager");
+        Assert.IsNotNull(m_RoomNumberText, "ERROR: m_RoomNumberText not set in RoomManager");
 
         m_StoneManager = GetComponentInChildren<StoneManager>();
         Assert.IsNotNull(m_StoneManager, "ERROR: m_StoneManager not found in RoomManager children");
@@ -35,6 +40,9 @@ public class RoomManager : MonoBehaviour
         Assert.IsNotNull(portalDoorCollectible, "ERROR: portalDoorCollectible not set in RoomManager");
 
         m_Skyables = new List<Transform>(); 
+
+        m_RoomNumber = 1;
+        ShowRoomNumber();
 
         EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;
         Initialize();
@@ -53,6 +61,7 @@ public class RoomManager : MonoBehaviour
     // Logic
     public void LoadRoom()
     {
+        ShowRoomNumber();
         m_StoneManager.Reset();
         m_PortalDoor.ClosePortalDoor();
         m_PortalKey.SetActive(false);
@@ -64,20 +73,26 @@ public class RoomManager : MonoBehaviour
 
     public void NextRoom()
     {
-        IncreaseStonesNumber();
+        IncreaseRoomValues();
         StartCoroutine(ResetNextRoomSequence());
     }
 
     public void NextRoomFromMenu()
     {
-        IncreaseStonesNumber();
+        IncreaseRoomValues();
         StartCoroutine(ResetRoomSequence());
     }
 
-    private void IncreaseStonesNumber()
+    private void IncreaseRoomValues()
     {
+        m_RoomNumber++;
         m_DynamicStonesNumber += 2;
         m_StaticStonesNumber += 1;
+    }
+
+    private void ShowRoomNumber()
+    {
+        m_RoomNumberText.text = $"{Constants.TEXT_ROOM_NUMBER} {m_RoomNumber}";
     }
 
     IEnumerator ResetNextRoomSequence()
