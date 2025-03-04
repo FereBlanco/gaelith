@@ -39,12 +39,12 @@ public class WorldManager : MonoBehaviour
     {
         m_RoomManager.ResetRoom();
     }
-    public void OnMenuNextRoomCallback()
+    private void OnMenuNextRoomCallback()
     {
         m_RoomManager.NextRoomFromMenu();
     }
 
-    private void OnMenuQuitCallback()
+    public void OnMenuQuitCallback()
     {
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
