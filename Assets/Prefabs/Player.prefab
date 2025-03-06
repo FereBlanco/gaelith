@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3289920496409990056}
-  - component: {fileID: 1774062753880956604}
   - component: {fileID: 954631289911085185}
   - component: {fileID: 6704254601387118381}
+  - component: {fileID: 1774062753880956604}
   - component: {fileID: -4723071794367054572}
   - component: {fileID: -241632554275056313}
   - component: {fileID: -252682660431566359}
@@ -39,18 +39,6 @@ Transform:
   - {fileID: 1229578895534217346}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1774062753880956604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5817539890727439163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05e9e0db3a013514f848a18bd3be0c6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &954631289911085185
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,6 +87,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 1.7, z: 0.8}
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &1774062753880956604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817539890727439163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e9e0db3a013514f848a18bd3be0c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4723071794367054572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,9 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ForwardKey: 273
+  m_ForwardKeyAlt: 119
   m_BackwardKey: 274
+  m_BackwardKeyAlt: 115
   m_RotateLeftKey: 276
+  m_RotateLeftKeyAlt: 97
   m_RotateRightKey: 275
+  m_RotateRightKeyAlt: 100
   m_PullKey: 32
 --- !u!114 &-241632554275056313
 MonoBehaviour:

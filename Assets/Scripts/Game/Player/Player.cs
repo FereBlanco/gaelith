@@ -19,8 +19,11 @@ namespace Scripts.Game.Player
         private Vector3 m_InitialPosition;
         private Quaternion m_InitialRotation;
 
+        private bool m_IsInteractionAllowed = false;
+        public bool IsInteractionAllowed { get => m_IsInteractionAllowed; private set => m_IsInteractionAllowed = value; }
+
         private bool m_IsCelebrating = false;
-        public bool IsCelebrating { get => m_IsCelebrating; set => m_IsCelebrating = value; }
+        public bool IsCelebrating { get => m_IsCelebrating; private set => m_IsCelebrating = value; }
 
         // MonoBehaviour
         private void Awake() {
@@ -59,9 +62,21 @@ namespace Scripts.Game.Player
             transform.rotation = m_InitialRotation;
         }
 
-        public void AllowMovement()
+        public void Reset()
         {
-            m_PlayerMovement.AllowMovement();
+            DontAllowInteraction();
+            DOTween.Kill(transform);
+        }
+
+        // Logic
+        public void AllowInteraction()
+        {
+            IsInteractionAllowed = true;
+        }
+
+        public void DontAllowInteraction()
+        {
+            IsInteractionAllowed = false;
         }
 
         public void SetInitialTransform(Transform newTransform)
@@ -70,11 +85,9 @@ namespace Scripts.Game.Player
             m_InitialRotation = newTransform.rotation;
         }
 
-        // Logic
         public void Celebrate()
         {
-            DOTween.Kill(transform);
-            m_PlayerMovement.DontAllowMovement();
+            Reset();
             IsCelebrating = true;
         }
 

@@ -1,6 +1,5 @@
-using System;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Scripts.Game.Player
 {
@@ -26,6 +25,8 @@ namespace Scripts.Game.Player
         [SerializeField] private KeyCode m_PullKey = KeyCode.Space;
 
         // Private members
+        private Player m_Player;
+
         private Vector3 m_InputMovementVector;
         private Vector3 m_InputRotationVector;
         private Vector3 m_InputPushVector;
@@ -42,6 +43,11 @@ namespace Scripts.Game.Player
         public Vector3 InputPullVector => m_InputPushVector;
 
         // MonoBehaviour
+        private void Awake() {
+            m_Player = GetComponent<Player>();
+            Assert.IsTrue(m_Player, "ERROR: m_Player value not found in PlayerAction class");
+        }
+                
         private void Update()
         {
             HandleMovementInput();
@@ -54,45 +60,60 @@ namespace Scripts.Game.Player
         {
             m_InputMovementVector = Vector3.zero;
 
-            if (Input.GetKeyUp(m_ForwardKey) || Input.GetKeyUp(m_ForwardKeyAlt) || m_IsButtonUpPressed)
+            if (m_Player.IsInteractionAllowed)
             {
-                m_IsButtonUpPressed = false;
-                m_InputMovementVector = transform.forward;
-            }
 
-            if (Input.GetKeyUp(m_BackwardKey) || Input.GetKeyUp(m_BackwardKeyAlt) || m_IsButtonDownPressed)
-            {
-                m_IsButtonDownPressed = false;
-                m_InputMovementVector = -1f * transform.forward;
+                if (Input.GetKeyUp(m_ForwardKey) || Input.GetKeyUp(m_ForwardKeyAlt) || m_IsButtonUpPressed)
+                {
+                    m_InputMovementVector = transform.forward;
+                }
+
+                if (Input.GetKeyUp(m_BackwardKey) || Input.GetKeyUp(m_BackwardKeyAlt) || m_IsButtonDownPressed)
+                {
+                    m_InputMovementVector = -1f * transform.forward;
+                }
             }
+            
+            m_IsButtonUpPressed = false;
+            m_IsButtonDownPressed = false;
         }
 
         private void HandleRotationInput()
         {
             m_InputRotationVector = Vector3.zero;
 
-            if (Input.GetKeyUp(m_RotateLeftKey) || Input.GetKeyUp(m_RotateLeftKeyAlt) || m_IsButtonLeftPressed)
+            if (m_Player.IsInteractionAllowed)
             {
-                m_IsButtonLeftPressed = false;
-                m_InputRotationVector = -1f * transform.up;
+
+                if (Input.GetKeyUp(m_RotateLeftKey) || Input.GetKeyUp(m_RotateLeftKeyAlt) || m_IsButtonLeftPressed)
+                {
+                    m_InputRotationVector = -1f * transform.up;
+                }
+
+                if (Input.GetKeyUp(m_RotateRightKey) || Input.GetKeyUp(m_RotateRightKeyAlt) || m_IsButtonRightPressed)
+                {
+                    m_InputRotationVector = transform.up;
+                }
             }
 
-            if (Input.GetKeyUp(m_RotateRightKey) || Input.GetKeyUp(m_RotateRightKeyAlt) || m_IsButtonRightPressed)
-            {
-                m_IsButtonRightPressed = false;
-                m_InputRotationVector = transform.up;
-            }
+            m_IsButtonLeftPressed = false;
+            m_IsButtonRightPressed = false;
         }
 
         private void HandlePushInput()
         {
             m_InputPushVector = Vector3.zero;
 
-            if (Input.GetKeyUp(m_PullKey) || m_IsButtonSpacePressed)
+            if (m_Player.IsInteractionAllowed)
             {
-                m_IsButtonSpacePressed = false;
-                m_InputPushVector = transform.forward;
+
+                if (Input.GetKeyUp(m_PullKey) || m_IsButtonSpacePressed)
+                {
+                    m_InputPushVector = transform.forward;
+                }
             }
+            
+            m_IsButtonSpacePressed = false;
         }
 
         // Public

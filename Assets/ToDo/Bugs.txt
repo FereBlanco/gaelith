@@ -1,1 +1,5 @@
 [ ] Player and StaticStone in the same tile at the begin of a room (not the first one)
+
+[ ] If I'm hitting Space (button or key) when reset the player continues pushing
+    I think this doesn`t happen when the player walks or rotates
+    The cause is related with the OnComplete event in DOTween

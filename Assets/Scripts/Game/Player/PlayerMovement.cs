@@ -15,51 +15,43 @@ namespace Scripts.Game.Player
         [SerializeField] private float rotateAngle = 90f;
 
         // Private members
-        private bool m_MovementIsAllowed = false;
-        public bool MovementIsAllowed { get => m_MovementIsAllowed; }
+        private Player m_Player;
 
         // MonoBehaviour
         private void Awake() {
             Assert.IsTrue(System.Enum.IsDefined(typeof(DG.Tweening.Ease), ease), "ERROR: ease value is invalid!!!");
+
+            m_Player = GetComponent<Player>();
+            Assert.IsTrue(m_Player, "ERROR: m_Player value not found in PlayerMovement class");
         }
 
         // Logic
         public void Move(Vector3 inputMovementVector)
         {
-            if (m_MovementIsAllowed && inputMovementVector != Vector3.zero)
+            if (m_Player.IsInteractionAllowed && inputMovementVector != Vector3.zero)
             {
                 Vector3 nextTilePosition = transform.position + inputMovementVector;
 
                 if (IsNextTileWalkable(inputMovementVector))
                 {
-                    DontAllowMovement();
+                    m_Player.DontAllowInteraction();
                     transform.DOMove(nextTilePosition, Constants.PLAYER_MOVE_TIME)
                         .SetEase(ease)
-                        .OnComplete(AllowMovement);
+                        .OnComplete(m_Player.AllowInteraction);
                 }
             }
         }
 
         public void Rotate(Vector3 inputRotationVector)
         {
-            if (m_MovementIsAllowed && inputRotationVector != Vector3.zero)
+            if (m_Player.IsInteractionAllowed && inputRotationVector != Vector3.zero)
             {
-                DontAllowMovement();
+                m_Player.DontAllowInteraction();
                 Vector3 newRotation = transform.rotation.eulerAngles + rotateAngle * inputRotationVector;
                 transform.DOLocalRotate(newRotation, Constants.PLAYER_ROTATE_TIME)
                     .SetEase(ease)
-                    .OnComplete(AllowMovement);
+                    .OnComplete(m_Player.AllowInteraction);
             }
-        }
-
-        public void AllowMovement()
-        {
-            m_MovementIsAllowed = true;
-        }
-
-        public void DontAllowMovement()
-        {
-            m_MovementIsAllowed = false;
         }
 
         private bool IsNextTileWalkable(Vector3 nextTileDirection)

@@ -79,6 +79,7 @@ public class RoomManager : MonoBehaviour
 
     public void NextRoomFromMenu()
     {
+        m_Player.Reset();
         IncreaseRoomValues();
         StartCoroutine(ResetRoomSequence());
     }
@@ -103,6 +104,7 @@ public class RoomManager : MonoBehaviour
 
     public void ResetRoom()
     {
+        m_Player.Reset();
         StartCoroutine(ResetRoomSequence());
     }
 
@@ -116,7 +118,7 @@ public class RoomManager : MonoBehaviour
     IEnumerator StartRoomInteractions()
     {
         yield return new WaitForSeconds(Constants.FALL_TIME);
-        m_Player.AllowMovement();
+        m_Player.AllowInteraction();
     }
 
     private void ElementsToSky()
