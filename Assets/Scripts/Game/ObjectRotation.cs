@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KeyRotation : MonoBehaviour
+public class ObjectRotation : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 250.0f;
     void FixedUpdate()

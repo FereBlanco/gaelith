@@ -8,6 +8,7 @@ public class EventHandler : MonoBehaviour
     public static Action OnMenuNext { get; internal set; }
 
     // Menu Events
+    public static event Action OnMenuStart;
     public static event Action OnMenuReset;
     public static event Action OnMenuNextRoom;
     public static event Action OnMenuQuit;
@@ -33,6 +34,7 @@ public class EventHandler : MonoBehaviour
     }
 
     // Raise Menu Events
+    public static void RaiseOnMenuStart() { OnMenuStart?.Invoke(); }
     public static void RaiseOnMenuReset() { OnMenuReset?.Invoke(); }
     public static void RaiseOnMenuNextRoom() { OnMenuNextRoom?.Invoke(); }
     public static void RaiseOnMenuQuit() { OnMenuQuit?.Invoke(); }    

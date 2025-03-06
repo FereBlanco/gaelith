@@ -2,6 +2,9 @@ using UnityEngine;
 
 public static class Constants
 {
+    public static string SCENE_START = "StartMenu";
+    public static string SCENE_ROOM = "BaseRoom";
+
     public static string TAG_PLAYER = "Player";
     public static string TAG_PORTAL_KEY = "PortalKey";
     public static string TAG_PORTAL_DOOR = "PortalDoor";

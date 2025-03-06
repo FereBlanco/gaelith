@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Scripts.Game.Menu
@@ -8,6 +7,7 @@ namespace Scripts.Game.Menu
         // Inspector fields
         [Header("Menu Options")]
         [Tooltip("Use these keys to select MENU options")]
+        [SerializeField] private KeyCode m_StartKey = KeyCode.Return;
         [SerializeField] private KeyCode m_ResetKey = KeyCode.R;
         [SerializeField] private KeyCode m_NextRoomKey = KeyCode.N;
         [SerializeField] private KeyCode m_QuitKey = KeyCode.Q;
@@ -24,6 +24,11 @@ namespace Scripts.Game.Menu
         // Private Methods
         private void HandleMenuInput()
         {
+            if (Input.GetKeyUp(m_ResetKey))
+            {
+                EventHandler.RaiseOnMenuReset();
+            }
+            
             if (Input.GetKeyUp(m_ResetKey))
             {
                 EventHandler.RaiseOnMenuReset();

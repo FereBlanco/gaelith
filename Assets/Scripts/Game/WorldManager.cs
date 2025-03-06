@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class WorldManager : MonoBehaviour
 {
@@ -46,10 +47,6 @@ public class WorldManager : MonoBehaviour
 
     public void OnMenuQuitCallback()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        SceneManager.LoadScene(Constants.SCENE_START);
     }
 }
