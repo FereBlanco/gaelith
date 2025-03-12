@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 using Scripts.Game.Stones.ObjectPool;
+using UnityEngine.Assertions;
 
 namespace Scripts.Game.Stones
 {

@@ -24,16 +24,16 @@ namespace Scripts.Game.Menu
         // Private Methods
         private void HandleMenuInput()
         {
+            if (Input.GetKeyUp(m_StartKey))
+            {
+                EventHandler.RaiseOnMenuStart();
+            }
+
             if (Input.GetKeyUp(m_ResetKey))
             {
                 EventHandler.RaiseOnMenuReset();
             }
             
-            if (Input.GetKeyUp(m_ResetKey))
-            {
-                EventHandler.RaiseOnMenuReset();
-            }
-
             if (Input.GetKeyUp(m_NextRoomKey))
             {
                 EventHandler.RaiseOnMenuNextRoom();

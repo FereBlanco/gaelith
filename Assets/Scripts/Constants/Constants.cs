@@ -17,8 +17,8 @@ public static class Constants
     public static float STONE_MOVE_TIME = 0.1f;
 
     public static float SKY_LEVEL = 20.0f;
-    public static float FLY_TIME = 3*1.0f;
-    public static float FALL_TIME = 3*1.0f;
+    public static float FLY_TIME = 1.0f;
+    public static float FALL_TIME = 1.0f;
     public static float CELEBRATION_TIME = 1.5f;
     
     public static string TEXT_ROOM_NUMBER = "Room: ";

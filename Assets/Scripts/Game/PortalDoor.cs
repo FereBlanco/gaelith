@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
-using NUnit.Framework;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(SquareInfo))]
 public class PortalDoor : MonoBehaviour
