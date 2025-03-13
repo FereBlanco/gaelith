@@ -3,4 +3,5 @@ Edit > Project Settings > Player > Publishing Settings
     Compression format: Brotli
     Decompression fallback: V
 
-Add the .htaccess of this folder to the <App root>/Build/ folder
+It worked without the .htaccess
+If needed, add it to the "<App root>/Build/" folder
