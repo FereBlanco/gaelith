@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.Assertions;
 using DG.Tweening;
+using UnityEngine.Assertions;
 
 namespace Scripts.Game.Player
 {
