@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Game.Player
 {
@@ -62,16 +63,29 @@ namespace Scripts.Game.Player
 
             if (m_Player.IsInteractionAllowed)
             {
+                int vertical = 0;
 
-                if (Input.GetKeyUp(m_ForwardKey) || Input.GetKeyUp(m_ForwardKeyAlt) || m_IsButtonUpPressed)
+                if (Gamepad.current != null) {
+                    if (Gamepad.current.dpad.up.isPressed)
+                    {
+                        vertical = 1;
+                    }
+                    else if (Gamepad.current.dpad.down.isPressed)
+                    {
+                        vertical = -1;
+                    }
+                }
+
+                if (Input.GetKeyUp(m_ForwardKey) || Input.GetKeyUp(m_ForwardKeyAlt) || m_IsButtonUpPressed || vertical == 1)
                 {
                     m_InputMovementVector = transform.forward;
                 }
 
-                if (Input.GetKeyUp(m_BackwardKey) || Input.GetKeyUp(m_BackwardKeyAlt) || m_IsButtonDownPressed)
+                if (Input.GetKeyUp(m_BackwardKey) || Input.GetKeyUp(m_BackwardKeyAlt) || m_IsButtonDownPressed || vertical == -1)
                 {
                     m_InputMovementVector = -1f * transform.forward;
                 }
+
             }
             
             m_IsButtonUpPressed = false;
@@ -84,13 +98,25 @@ namespace Scripts.Game.Player
 
             if (m_Player.IsInteractionAllowed)
             {
+                int horizontal = 0;
 
-                if (Input.GetKeyUp(m_RotateLeftKey) || Input.GetKeyUp(m_RotateLeftKeyAlt) || m_IsButtonLeftPressed)
+                if (Gamepad.current != null) {
+                    if (Gamepad.current.dpad.left.isPressed)
+                    {
+                        horizontal = -1;
+                    }
+                    else if (Gamepad.current.dpad.right.isPressed)
+                    {
+                        horizontal = 1;
+                    }
+                }
+
+                if (Input.GetKeyUp(m_RotateLeftKey) || Input.GetKeyUp(m_RotateLeftKeyAlt) || m_IsButtonLeftPressed || horizontal == -1)
                 {
                     m_InputRotationVector = -1f * transform.up;
                 }
 
-                if (Input.GetKeyUp(m_RotateRightKey) || Input.GetKeyUp(m_RotateRightKeyAlt) || m_IsButtonRightPressed)
+                if (Input.GetKeyUp(m_RotateRightKey) || Input.GetKeyUp(m_RotateRightKeyAlt) || m_IsButtonRightPressed || horizontal == 1)
                 {
                     m_InputRotationVector = transform.up;
                 }
@@ -106,8 +132,7 @@ namespace Scripts.Game.Player
 
             if (m_Player.IsInteractionAllowed)
             {
-
-                if (Input.GetKeyUp(m_PullKey) || m_IsButtonSpacePressed)
+                if (Input.GetKeyUp(m_PullKey) || m_IsButtonSpacePressed || (Gamepad.current != null && Gamepad.current.buttonWest.isPressed))
                 {
                     m_InputPushVector = transform.forward;
                 }
