@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -7,26 +8,13 @@ namespace Scripts.Game.Player
     public class PlayerInput : MonoBehaviour
     {
         // Inspector fields
-        [Header("Movement Controls")]
-        [Tooltip("Use these keys to move Player forward and backward")]
-        [SerializeField] private KeyCode m_ForwardKey = KeyCode.UpArrow;
-        [SerializeField] private KeyCode m_ForwardKeyAlt = KeyCode.W;
-        [SerializeField] private KeyCode m_BackwardKey = KeyCode.DownArrow;
-        [SerializeField] private KeyCode m_BackwardKeyAlt = KeyCode.S;
-
-        [Header("Rotation Controls")]
-        [Tooltip("Use these keys to rotate Player left and right")]
-        [SerializeField] private KeyCode m_RotateLeftKey = KeyCode.LeftArrow;
-        [SerializeField] private KeyCode m_RotateLeftKeyAlt = KeyCode.A;
-        [SerializeField] private KeyCode m_RotateRightKey = KeyCode.RightArrow;
-        [SerializeField] private KeyCode m_RotateRightKeyAlt = KeyCode.D;
-
-        [Header("Action Controls")]
-        [Tooltip("Use these keys to perform Player ACTIONS")]
-        [SerializeField] private KeyCode m_PullKey = KeyCode.Space;
+        public InputActionAsset InputActions;
 
         // Private members
         private Player m_Player;
+
+        private InputAction m_moveAction;
+        private InputAction m_pushAction;
 
         private Vector3 m_InputMovementVector;
         private Vector3 m_InputRotationVector;
@@ -46,14 +34,62 @@ namespace Scripts.Game.Player
         // MonoBehaviour
         private void Awake() {
             m_Player = GetComponent<Player>();
-            Assert.IsTrue(m_Player, "ERROR: m_Player value not found in PlayerAction class");
+            Assert.IsNotNull(m_Player, "ERROR: m_Player value not found in PlayerInput class");
+
+            m_moveAction = InputActions.FindAction("Move");
+            Assert.IsNotNull(m_moveAction, "ERROR: m_moveAction value not found in PlayerInput class");
+
+            m_pushAction = InputActions.FindAction("Push");
+            Assert.IsNotNull(m_pushAction, "ERROR: m_pushAction value not found in PlayerInput class");
         }
                 
+        private void OnEnable() {
+            InputActions.FindActionMap("Player").Enable();
+        }
+
+        private void OnDisable() {
+            InputActions.FindActionMap("Player").Disable();
+        }
+
         private void Update()
         {
+            CheckInputSystemEntries();
+            
             HandleMovementInput();
             HandleRotationInput();
             HandlePushInput();
+        }
+
+        private void CheckInputSystemEntries()
+        {
+            // Movement & Rotation
+            if (m_moveAction.WasPressedThisFrame())
+            {
+                Vector2 moveInputValue = m_moveAction.ReadValue<Vector2>();
+
+                if (moveInputValue.y == 1f)
+                {
+                    m_IsButtonUpPressed = true;
+                }
+                else if (moveInputValue.y == -1f)
+                {
+                    m_IsButtonDownPressed = true;
+                }
+                else if (moveInputValue.x == 1f)
+                {
+                    m_IsButtonRightPressed = true;
+                }
+                else if (moveInputValue.x == -1f)
+                {
+                    m_IsButtonLeftPressed = true;
+                }
+            }
+
+            // Push
+            if (m_pushAction.WasPressedThisFrame())
+            {
+                m_IsButtonSpacePressed = true;
+            }
         }
 
         // Logic
@@ -63,29 +99,15 @@ namespace Scripts.Game.Player
 
             if (m_Player.IsInteractionAllowed)
             {
-                int vertical = 0;
-
-                if (Gamepad.current != null) {
-                    if (Gamepad.current.dpad.up.isPressed)
-                    {
-                        vertical = 1;
-                    }
-                    else if (Gamepad.current.dpad.down.isPressed)
-                    {
-                        vertical = -1;
-                    }
-                }
-
-                if (Input.GetKeyUp(m_ForwardKey) || Input.GetKeyUp(m_ForwardKeyAlt) || m_IsButtonUpPressed || vertical == 1)
+                if (m_IsButtonUpPressed)
                 {
                     m_InputMovementVector = transform.forward;
                 }
 
-                if (Input.GetKeyUp(m_BackwardKey) || Input.GetKeyUp(m_BackwardKeyAlt) || m_IsButtonDownPressed || vertical == -1)
+                if (m_IsButtonDownPressed)
                 {
                     m_InputMovementVector = -1f * transform.forward;
                 }
-
             }
             
             m_IsButtonUpPressed = false;
@@ -98,25 +120,12 @@ namespace Scripts.Game.Player
 
             if (m_Player.IsInteractionAllowed)
             {
-                int horizontal = 0;
-
-                if (Gamepad.current != null) {
-                    if (Gamepad.current.dpad.left.isPressed)
-                    {
-                        horizontal = -1;
-                    }
-                    else if (Gamepad.current.dpad.right.isPressed)
-                    {
-                        horizontal = 1;
-                    }
-                }
-
-                if (Input.GetKeyUp(m_RotateLeftKey) || Input.GetKeyUp(m_RotateLeftKeyAlt) || m_IsButtonLeftPressed || horizontal == -1)
+                if (m_IsButtonLeftPressed)
                 {
                     m_InputRotationVector = -1f * transform.up;
                 }
 
-                if (Input.GetKeyUp(m_RotateRightKey) || Input.GetKeyUp(m_RotateRightKeyAlt) || m_IsButtonRightPressed || horizontal == 1)
+                if (m_IsButtonRightPressed)
                 {
                     m_InputRotationVector = transform.up;
                 }
@@ -132,7 +141,7 @@ namespace Scripts.Game.Player
 
             if (m_Player.IsInteractionAllowed)
             {
-                if (Input.GetKeyUp(m_PullKey) || m_IsButtonSpacePressed || (Gamepad.current != null && Gamepad.current.buttonWest.isPressed))
+                if (m_IsButtonSpacePressed)
                 {
                     m_InputPushVector = transform.forward;
                 }
