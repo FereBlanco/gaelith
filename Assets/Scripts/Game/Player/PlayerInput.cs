@@ -9,7 +9,7 @@ namespace Scripts.Game.Player
     public class PlayerInput : MonoBehaviour
     {
         // Inspector fields
-        public InputActionAsset InputActions;
+        [SerializeField] private InputActionAsset InputActions;
 
         // Private members
         private InputAction m_moveAction;
