@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -11,31 +12,20 @@ namespace Scripts.Game.Player
         public InputActionAsset InputActions;
 
         // Private members
-        private Player m_Player;
-
         private InputAction m_moveAction;
         private InputAction m_pushAction;
 
         private Vector3 m_InputMovementVector;
-        private Vector3 m_InputRotationVector;
-        private Vector3 m_InputPushVector;
-
-        private bool m_IsButtonUpPressed = false;
-        private bool m_IsButtonDownPressed = false;
-        private bool m_IsButtonLeftPressed = false;
-        private bool m_IsButtonRightPressed = false;
-        private bool m_IsButtonSpacePressed = false;
-
-        // Properties
         public Vector3 InputMovementVector => m_InputMovementVector;
+
+        private Vector3 m_InputRotationVector;
         public Vector3 InputRotationVector => m_InputRotationVector;
+
+        private Vector3 m_InputPushVector;
         public Vector3 InputPullVector => m_InputPushVector;
 
         // MonoBehaviour
         private void Awake() {
-            m_Player = GetComponent<Player>();
-            Assert.IsNotNull(m_Player, "ERROR: m_Player value not found in PlayerInput class");
-
             m_moveAction = InputActions.FindAction("Move");
             Assert.IsNotNull(m_moveAction, "ERROR: m_moveAction value not found in PlayerInput class");
 
@@ -44,136 +34,85 @@ namespace Scripts.Game.Player
         }
                 
         private void OnEnable() {
-            InputActions.FindActionMap("Player").Enable();
+            m_moveAction.Enable();
+            m_moveAction.performed += OnMove;
+
+            m_pushAction.Enable();
+            m_pushAction.performed += OnPush;
         }
 
         private void OnDisable() {
-            InputActions.FindActionMap("Player").Disable();
-        }
+            m_moveAction.performed -= OnMove;
+            m_moveAction.Disable();
 
-        private void Update()
-        {
-            CheckInputSystemEntries();
-            
-            HandleMovementInput();
-            HandleRotationInput();
-            HandlePushInput();
-        }
-
-        private void CheckInputSystemEntries()
-        {
-            // Movement & Rotation
-            if (m_moveAction.WasPressedThisFrame())
-            {
-                Vector2 moveInputValue = m_moveAction.ReadValue<Vector2>();
-
-                if (moveInputValue.y == 1f)
-                {
-                    m_IsButtonUpPressed = true;
-                }
-                else if (moveInputValue.y == -1f)
-                {
-                    m_IsButtonDownPressed = true;
-                }
-                else if (moveInputValue.x == 1f)
-                {
-                    m_IsButtonRightPressed = true;
-                }
-                else if (moveInputValue.x == -1f)
-                {
-                    m_IsButtonLeftPressed = true;
-                }
-            }
-
-            // Push
-            if (m_pushAction.WasPressedThisFrame())
-            {
-                m_IsButtonSpacePressed = true;
-            }
+            m_pushAction.performed -= OnPush;
+            m_pushAction.Disable();
         }
 
         // Logic
-        private void HandleMovementInput()
+        private void OnMove(InputAction.CallbackContext context)
         {
-            m_InputMovementVector = Vector3.zero;
+            Vector2 moveInputValue = m_moveAction.ReadValue<Vector2>();
 
-            if (m_Player.IsInteractionAllowed)
+            if (moveInputValue.y == 1f)
             {
-                if (m_IsButtonUpPressed)
-                {
-                    m_InputMovementVector = transform.forward;
-                }
-
-                if (m_IsButtonDownPressed)
-                {
-                    m_InputMovementVector = -1f * transform.forward;
-                }
+                StepForward();
             }
-            
-            m_IsButtonUpPressed = false;
-            m_IsButtonDownPressed = false;
+            else if (moveInputValue.y == -1f)
+            {
+                StepBackward();
+            }
+            else if (moveInputValue.x == 1f)
+            {
+                TurnRight();
+            }
+            else if (moveInputValue.x == -1f)
+            {
+                TurnLeft();
+            }
+        }
+        private void OnPush(InputAction.CallbackContext context)
+        {
+            Push();
         }
 
-        private void HandleRotationInput()
-        {
-            m_InputRotationVector = Vector3.zero;
-
-            if (m_Player.IsInteractionAllowed)
-            {
-                if (m_IsButtonLeftPressed)
-                {
-                    m_InputRotationVector = -1f * transform.up;
-                }
-
-                if (m_IsButtonRightPressed)
-                {
-                    m_InputRotationVector = transform.up;
-                }
-            }
-
-            m_IsButtonLeftPressed = false;
-            m_IsButtonRightPressed = false;
-        }
-
-        private void HandlePushInput()
-        {
-            m_InputPushVector = Vector3.zero;
-
-            if (m_Player.IsInteractionAllowed)
-            {
-                if (m_IsButtonSpacePressed)
-                {
-                    m_InputPushVector = transform.forward;
-                }
-            }
-            
-            m_IsButtonSpacePressed = false;
-        }
-
-        // Public
         public void StepForward()
         {
-            m_IsButtonUpPressed = true;            
+            m_InputMovementVector = transform.forward;       
+            StartCoroutine(ClearInput());
         }
 
         public void StepBackward()
         {
-            m_IsButtonDownPressed = true;            
+            m_InputMovementVector = -1f * transform.forward;        
+            StartCoroutine(ClearInput());
         }
         
         public void TurnLeft()
         {
-            m_IsButtonLeftPressed = true;            
+            m_InputRotationVector = -1f * transform.up;         
+            StartCoroutine(ClearInput());
         }
 
         public void TurnRight()
         {
-            m_IsButtonRightPressed = true;
+            m_InputRotationVector = transform.up;
+            StartCoroutine(ClearInput());
         }
 
         public void Push()
         {
-            m_IsButtonSpacePressed = true;
+            m_InputPushVector = transform.forward;
+            StartCoroutine(ClearInput());
+        }
+
+        IEnumerator ClearInput()
+        {
+            yield return null;
+
+            m_InputMovementVector = Vector3.zero;
+            m_InputRotationVector = Vector3.zero;
+            m_InputPushVector = Vector3.zero;
         }
     }
 }
