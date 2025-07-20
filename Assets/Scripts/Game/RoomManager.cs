@@ -1,10 +1,12 @@
 using UnityEngine.Assertions;
 using UnityEngine;
-using Scripts.Game.Player;
-using Scripts.Game.Stones;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+
+using Scripts.Game.Player;
+using Scripts.Game.Stones;
+using Scripts.Tools;
 
 public class RoomManager : MonoBehaviour
 {
@@ -26,8 +28,13 @@ public class RoomManager : MonoBehaviour
     private int m_RoomNumber;
     [SerializeField] private TMP_Text m_RoomNumberText;
 
+    private WaitForSeconds m_FallTime = new WaitForSeconds(Constants.FALL_TIME);
+    private WaitForSeconds m_FlyTime = new WaitForSeconds(Constants.FLY_TIME);
+    private WaitForSeconds m_CelebrationTime = new WaitForSeconds(Constants.CELEBRATION_TIME);
+
     // MonoBehaviour
-    private void Awake() {
+    private void Awake()
+    {
         Assert.IsNotNull(m_Player, "ERROR: m_Player not set in RoomManager");
         Assert.IsNotNull(m_PortalKey, "ERROR: m_PortalKeyPrefab not set in RoomManager");
         Assert.IsNotNull(m_PortalDoor, "ERROR: m_PortalDoor not set in RoomManager");
@@ -39,22 +46,32 @@ public class RoomManager : MonoBehaviour
         Collectible portalDoorCollectible = m_PortalDoor.GetComponent<Collectible>();
         Assert.IsNotNull(portalDoorCollectible, "ERROR: portalDoorCollectible not set in RoomManager");
 
-        m_Skyables = new List<Transform>(); 
+        m_Skyables = new List<Transform>();
 
         m_RoomNumber = 1;
         ShowRoomNumber();
-
-        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;
-        Initialize();
     }
 
     // Initialize & Reset
-    private void Initialize()
+    private void InitializeEvents()
     {
+        EventHandler.OnCollectibleCollected += OnCollectibleCollectedCallback;
+
         if (false == isKeyStonesAlignSubscribed)
         {
             EventHandler.OnKeyStonesAlign += OnKeyStonesAlignedCallback;
             isKeyStonesAlignSubscribed = true;
+        }
+    }
+
+    private void ResetEvents()
+    {
+        EventHandler.OnCollectibleCollected -= OnCollectibleCollectedCallback;
+
+        if (true == isKeyStonesAlignSubscribed)
+        {
+            EventHandler.OnKeyStonesAlign -= OnKeyStonesAlignedCallback;
+            isKeyStonesAlignSubscribed = false;
         }
     }
 
@@ -93,12 +110,12 @@ public class RoomManager : MonoBehaviour
 
     private void ShowRoomNumber()
     {
-        m_RoomNumberText.text = $"{Constants.TEXT_ROOM_NUMBER} {m_RoomNumber}";
+        m_RoomNumberText.text = CustomStringTools.CreateString(Constants.TEXT_ROOM_NUMBER, " ", m_RoomNumber.ToString());
     }
 
     IEnumerator ResetNextRoomSequence()
     {
-        yield return new WaitForSeconds(Constants.CELEBRATION_TIME);
+        yield return m_CelebrationTime;
         StartCoroutine(ResetRoomSequence());
     }
 
@@ -111,13 +128,13 @@ public class RoomManager : MonoBehaviour
     IEnumerator ResetRoomSequence()
     {
         ElementsToSky();
-        yield return new WaitForSeconds(Constants.FLY_TIME);
+        yield return m_FlyTime;
         LoadRoom();
     }
 
     IEnumerator StartRoomInteractions()
     {
-        yield return new WaitForSeconds(Constants.FALL_TIME);
+        yield return m_FallTime;
         m_Player.AllowInteraction();
     }
 
@@ -180,5 +197,20 @@ public class RoomManager : MonoBehaviour
             m_Player.Celebrate();
             NextRoom();
         }
+    }
+
+    // Monobehaviour Callbacks
+    private void OnEnable()
+    {
+        InitializeEvents();
+    }
+    private void OnDisable()
+    {
+        ResetEvents();
+    }
+
+    private void OnDestroy()
+    {
+        ResetEvents();
     }
 }

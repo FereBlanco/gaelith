@@ -11,7 +11,7 @@ public class FloorTileStyle : MonoBehaviour
     private void Awake() {
         Assert.IsNotNull(model, "ERROR: model is null");
 
-        if (materials == null || materials.Length == 0) throw new Exception("ERROR: materials array is null or empty");
+        if (null == materials || 0 == materials.Length) throw new Exception("ERROR: materials array is null or empty");
         foreach (var material in materials)
         {
             Assert.IsNotNull(material, "ERROR: any null material in the materials array");

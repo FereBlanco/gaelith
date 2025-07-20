@@ -11,8 +11,6 @@ public class WorldManager : MonoBehaviour
     {
         m_RoomManager = GetComponentInChildren<RoomManager>();
         Assert.IsNotNull(m_RoomManager, "ERROR: m_RoomManager not found in WorldManager children");
-
-        Initialize();
     }
 
     public void Start()
@@ -20,19 +18,36 @@ public class WorldManager : MonoBehaviour
         m_RoomManager.LoadRoom();
     }
 
-    // Initialize & Reset
+    // Logic
     private void Initialize()
     {
         EventHandler.OnMenuReset += OnMenuResetCallback;
         EventHandler.OnMenuNextRoom += OnMenuNextRoomCallback;
         EventHandler.OnMenuQuit += OnMenuQuitCallback;
     }
-    
-    public void Reset()
+
+    private void Reset()
     {
         EventHandler.OnMenuReset -= OnMenuResetCallback;
         EventHandler.OnMenuNextRoom -= OnMenuNextRoomCallback;
         EventHandler.OnMenuQuit -= OnMenuQuitCallback;
+    }
+
+    // MonoBehaviour Callbacks
+
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
+    private void OnDisable()
+    {
+        Reset();
+    }
+
+    private void OnDestroy()
+    {
+        Reset();
     }
 
     // Callbacks

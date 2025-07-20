@@ -13,8 +13,8 @@ namespace Scripts.Game.Stones
 
         [Header("Ignored Game Objects Position")]
         [SerializeField] private Transform[] m_IgnoreGameObjectsPosition;
-        List<Vector3> m_InitialFreePositions;
-        List<Vector3> m_CurrentFreePositions;
+        List<Vector3> m_InitialFreePositions = new List<Vector3>();
+        List<Vector3> m_CurrentFreePositions = new List<Vector3>();
 
         // MonoBehaviour
         private void Awake()
@@ -28,9 +28,6 @@ namespace Scripts.Game.Stones
                     throw new Exception("ERROR: m_IgnoreGameObjectsPosition contains null elements in PositionManager");
                 }
             }
-
-            m_InitialFreePositions = new List<Vector3>();
-            m_CurrentFreePositions = new List<Vector3>();
         }
 
         // Initialize & Reset

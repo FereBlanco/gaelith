@@ -1,5 +1,8 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.Assertions;
+
+using Scripts.Tools;
 
 public class FloorManager : MonoBehaviour
 {
@@ -8,7 +11,8 @@ public class FloorManager : MonoBehaviour
     [SerializeField] int rows = 8;
     [SerializeField] int cols = 8;
 
-    private void Awake() {
+    private void Awake()
+    {
         Assert.IsNotNull(tileModel, "ERROR: tileModel is null");
         Assert.IsNotNull(tileModel, "ERROR: limitModel is null");
 
@@ -19,18 +23,17 @@ public class FloorManager : MonoBehaviour
                 if (i == 0 || i == rows || j == 0 || j == cols)
                 {
                     GameObject newTile = Instantiate(limitModel, transform);
-                    newTile.name = $"Limit_{i.ToString("00")}_{j.ToString("00")}";
+                    newTile.name = CustomStringTools.CreateString("Limit_", i.ToString(), "_", j.ToString());
                     newTile.transform.Translate(i, 0f, j);
                 }
                 else
                 {
                     GameObject newTile = Instantiate(tileModel, transform);
-                    newTile.name = $"Tile_{i.ToString("00")}_{j.ToString("00")}";
+                    newTile.name = CustomStringTools.CreateString("Tile_", i.ToString(), "_", j.ToString());
                     newTile.transform.Translate(i, 0f, j);
-                    newTile.GetComponent<FloorTileStyle>().SetMaterial((i+j) % 2);
+                    newTile.GetComponent<FloorTileStyle>().SetMaterial((i + j) % 2);
                 }
             }
         }
-
-    }    
+    }
 }

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Scripts.Game.Stones.ObjectPool;
 using UnityEngine.Assertions;
+
+using Scripts.Game.Stones.ObjectPool;
+using Scripts.Tools;
 
 namespace Scripts.Game.Stones
 {
@@ -90,7 +92,7 @@ namespace Scripts.Game.Stones
                 }
                 else
                 {
-                    Debug.Log("ERROR: No more free positions to create stones");
+                    CustomDebugTools.CustomLog("ERROR: No more free positions to create stones");
                 }
             }
             return stoneList;

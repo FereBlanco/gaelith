@@ -9,24 +9,19 @@ namespace Scripts.Game.Stones
 {
     public class KeyStoneManager : MonoBehaviour
     {
-        private List<PooledStone> m_KeyStones;
-        private bool m_AreStonesInARow;
+        private List<PooledStone> m_KeyStones = new List<PooledStone>();
+        private bool m_AreStonesInARow = false;
         private Vector3 m_CentralPosition;
-        private List<int> m_XPositions;
-        private List<int> m_ZPositions;
+        private List<int> m_XPositions = new List<int>();
+        private List<int> m_ZPositions = new List<int>();
         private float m_TimeToStonesTogetherFX = 0.5f;
+        private WaitForSeconds m_WaitStonesTogetherFX;
         private float m_StonesTogetherHeight = 2.0f;
 
         // MonoBehaviour
-        private void Awake() {
-            m_XPositions = new List<int>();
-            m_ZPositions = new List<int>();
-
-            m_KeyStones = new List<PooledStone>();
-
-            m_AreStonesInARow = false;
-
-            EventHandler.OnStoneStop += HandleOnStoneStop;
+        private void Awake()
+        {
+            m_WaitStonesTogetherFX = new WaitForSeconds(m_TimeToStonesTogetherFX);
         }
 
         // Initialize & Reset
@@ -45,17 +40,12 @@ namespace Scripts.Game.Stones
         {
             foreach (PooledStone keyStone in m_KeyStones)
             {
-                // StoneHitManager stoneHit = keyStone.GetComponent<StoneHitManager>();
-                // if (null != stoneHit)
-                // {
-                //     EventHandler.OnStoneStop -= HandleOnStoneStop;
-                // }
                 keyStone.Release();
             }
 
             m_XPositions.Clear();
             m_ZPositions.Clear();
-            m_KeyStones.Clear();      
+            m_KeyStones.Clear();
         }
 
         // Logic
@@ -99,7 +89,7 @@ namespace Scripts.Game.Stones
                             m_TimeToStonesTogetherFX / 2)
                             .SetEase(Ease.OutCirc);
             }
-            yield return new WaitForSeconds(m_TimeToStonesTogetherFX / 2);
+            yield return m_WaitStonesTogetherFX;
 
             foreach (PooledStone keyStone in m_KeyStones)
             {
@@ -107,10 +97,26 @@ namespace Scripts.Game.Stones
                             m_TimeToStonesTogetherFX / 2)
                             .SetEase(Ease.OutCirc);
             }
-            yield return new WaitForSeconds((m_TimeToStonesTogetherFX / 2));
+            yield return m_WaitStonesTogetherFX;
 
             EventHandler.RaiseOnKeyStonesAlign(m_CentralPosition);
             Reset();
+        }
+
+        // MonoBehaviour Callbacks
+        private void OnEnable()
+        {
+            EventHandler.OnStoneStop += HandleOnStoneStop;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.OnStoneStop -= HandleOnStoneStop;
+        }
+
+        private void OnDestroy()
+        {
+            EventHandler.OnStoneStop -= HandleOnStoneStop;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -33,21 +34,6 @@ namespace Scripts.Game.Player
             Assert.IsNotNull(m_pushAction, "ERROR: m_pushAction value not found in PlayerInput class");
         }
                 
-        private void OnEnable() {
-            m_moveAction.Enable();
-            m_moveAction.performed += OnMove;
-
-            m_pushAction.Enable();
-            m_pushAction.performed += OnPush;
-        }
-
-        private void OnDisable() {
-            m_moveAction.performed -= OnMove;
-            m_moveAction.Disable();
-
-            m_pushAction.performed -= OnPush;
-            m_pushAction.Disable();
-        }
 
         // Logic
         private void OnMove(InputAction.CallbackContext context)
@@ -106,6 +92,24 @@ namespace Scripts.Game.Player
             StartCoroutine(ClearInput());
         }
 
+        private void EnableActions()
+        {
+            m_moveAction.Enable();
+            m_moveAction.performed += OnMove;
+
+            m_pushAction.Enable();
+            m_pushAction.performed += OnPush;
+        }
+
+        private void DisableActions()
+        {
+            m_moveAction.performed -= OnMove;
+            m_moveAction.Disable();
+
+            m_pushAction.performed -= OnPush;
+            m_pushAction.Disable();
+        }
+
         IEnumerator ClearInput()
         {
             yield return null;
@@ -113,6 +117,22 @@ namespace Scripts.Game.Player
             m_InputMovementVector = Vector3.zero;
             m_InputRotationVector = Vector3.zero;
             m_InputPushVector = Vector3.zero;
+        }
+
+        // MonoBehaviour Callbacks
+        private void OnEnable()
+        {
+            EnableActions();
+        }
+
+        private void OnDisable()
+        {
+            DisableActions();
+        }
+        
+        private void OnDestroy()
+        {
+            DisableActions();
         }
     }
 }
