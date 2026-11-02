@@ -82,8 +82,10 @@ public class RoomManager : MonoBehaviour
         m_StoneManager.Reset();
         m_PortalDoor.ClosePortalDoor();
         m_PortalKey.SetActive(false);
-        m_StoneManager.Initialize(m_KeyStonesNumber, m_DynamicStonesNumber, m_StaticStonesNumber);
+        // The Player must be back at its initial position BEFORE the stones are placed,
+        // because PositionManager excludes the tile where the Player currently is
         m_Player.Initialize();
+        m_StoneManager.Initialize(m_KeyStonesNumber, m_DynamicStonesNumber, m_StaticStonesNumber);
         ElementsToGround();
         StartCoroutine(StartRoomInteractions());
     }
