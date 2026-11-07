@@ -15,6 +15,7 @@ namespace Scripts.Game.Player
         // Private members
         private InputAction m_moveAction;
         private InputAction m_pushAction;
+        private bool m_AreActionsEnabled = false;
 
         private Vector3 m_InputMovementVector;
         public Vector3 InputMovementVector => m_InputMovementVector;
@@ -94,6 +95,9 @@ namespace Scripts.Game.Player
 
         private void EnableActions()
         {
+            if (m_AreActionsEnabled) return;
+            m_AreActionsEnabled = true;
+
             m_moveAction.Enable();
             m_moveAction.performed += OnMove;
 
@@ -103,6 +107,9 @@ namespace Scripts.Game.Player
 
         private void DisableActions()
         {
+            if (!m_AreActionsEnabled) return;
+            m_AreActionsEnabled = false;
+
             m_moveAction.performed -= OnMove;
             m_moveAction.Disable();
 
@@ -119,19 +126,35 @@ namespace Scripts.Game.Player
             m_InputPushVector = Vector3.zero;
         }
 
+        // The Player doesn't move while the gamepad is navigating the menu (Reset / Quit buttons)
+        private void OnMenuFocusCallback(bool isMenuFocused)
+        {
+            if (isMenuFocused)
+            {
+                DisableActions();
+            }
+            else if (isActiveAndEnabled)
+            {
+                EnableActions();
+            }
+        }
+
         // MonoBehaviour Callbacks
         private void OnEnable()
         {
             EnableActions();
+            EventHandler.OnMenuFocus += OnMenuFocusCallback;
         }
 
         private void OnDisable()
         {
+            EventHandler.OnMenuFocus -= OnMenuFocusCallback;
             DisableActions();
         }
         
         private void OnDestroy()
         {
+            EventHandler.OnMenuFocus -= OnMenuFocusCallback;
             DisableActions();
         }
     }

@@ -12,6 +12,7 @@ public class EventHandler : MonoBehaviour
     public static event Action OnMenuReset;
     public static event Action OnMenuNextRoom;
     public static event Action OnMenuQuit;
+    public static event Action<bool> OnMenuFocus;
 
     // Stone Events
     public static event Action<bool> OnStoneStop;
@@ -38,6 +39,7 @@ public class EventHandler : MonoBehaviour
     public static void RaiseOnMenuReset() { OnMenuReset?.Invoke(); }
     public static void RaiseOnMenuNextRoom() { OnMenuNextRoom?.Invoke(); }
     public static void RaiseOnMenuQuit() { OnMenuQuit?.Invoke(); }    
+    public static void RaiseOnMenuFocus(bool isFocused) { OnMenuFocus?.Invoke(isFocused); }
 
     // Stone Events
     public static void RaiseOnStoneStop(bool isSpecial = false) { OnStoneStop?.Invoke(isSpecial); }    
