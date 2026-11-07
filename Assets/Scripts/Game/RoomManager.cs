@@ -32,6 +32,8 @@ public class RoomManager : MonoBehaviour
     private WaitForSeconds m_FlyTime = new WaitForSeconds(Constants.FLY_TIME);
     private WaitForSeconds m_CelebrationTime = new WaitForSeconds(Constants.CELEBRATION_TIME);
 
+    private Coroutine m_StartRoomInteractionsCoroutine;
+
     // MonoBehaviour
     private void Awake()
     {
@@ -82,10 +84,12 @@ public class RoomManager : MonoBehaviour
         m_StoneManager.Reset();
         m_PortalDoor.ClosePortalDoor();
         m_PortalKey.SetActive(false);
-        m_StoneManager.Initialize(m_KeyStonesNumber, m_DynamicStonesNumber, m_StaticStonesNumber);
+        // The Player must be back at its initial position BEFORE the stones are placed,
+        // because PositionManager excludes the tile where the Player currently is
         m_Player.Initialize();
+        m_StoneManager.Initialize(m_KeyStonesNumber, m_DynamicStonesNumber, m_StaticStonesNumber);
         ElementsToGround();
-        StartCoroutine(StartRoomInteractions());
+        m_StartRoomInteractionsCoroutine = StartCoroutine(StartRoomInteractions());
     }
 
     public void NextRoom()
@@ -127,6 +131,14 @@ public class RoomManager : MonoBehaviour
 
     IEnumerator ResetRoomSequence()
     {
+        // If the room is reset before the elements have landed, the pending StartRoomInteractions
+        // would allow the Player to interact in the middle of the reset
+        if (null != m_StartRoomInteractionsCoroutine)
+        {
+            StopCoroutine(m_StartRoomInteractionsCoroutine);
+            m_StartRoomInteractionsCoroutine = null;
+        }
+
         ElementsToSky();
         yield return m_FlyTime;
         LoadRoom();

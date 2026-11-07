@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 99107013}
   - component: {fileID: 99107012}
   - component: {fileID: 99107011}
+  - component: {fileID: 99107016}
   m_Layer: 0
   m_Name: Button Quit
   m_TagString: Untagged
@@ -514,7 +515,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -533,19 +534,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 99107012}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 630988803}
-        m_TargetAssemblyTypeName: WorldManager, Assembly-CSharp
-        m_MethodName: OnMenuQuitCallback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &99107012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,6 +721,7 @@ GameObject:
   - component: {fileID: 272017255}
   - component: {fileID: 272017254}
   - component: {fileID: 272017253}
+  - component: {fileID: 272017258}
   m_Layer: 0
   m_Name: Button Right
   m_TagString: Untagged
@@ -802,19 +792,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 272017254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1679996057}
-        m_TargetAssemblyTypeName: Scripts.Game.Player.PlayerInput, Assembly-CSharp
-        m_MethodName: TurnRight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &272017254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,6 +938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 540244453}
   - component: {fileID: 540244454}
+  - component: {fileID: 540244455}
   m_Layer: 0
   m_Name: MenuInput
   m_TagString: Untagged
@@ -994,10 +973,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa14205c49968af40b53a698e344e2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartKey: 13
-  m_ResetKey: 114
-  m_NextRoomKey: 110
-  m_QuitKey: 113
+  InputActions: {fileID: -944628639613478452, guid: 9c5e7545737b20047a6f0ed8f17325fb, type: 3}
+  m_ActionMapName: Room
 --- !u!1 &630988802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,6 +1480,7 @@ GameObject:
   - component: {fileID: 761342252}
   - component: {fileID: 761342251}
   - component: {fileID: 761342250}
+  - component: {fileID: 761342255}
   m_Layer: 0
   m_Name: Button Up
   m_TagString: Untagged
@@ -1573,19 +1551,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 761342251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1679996057}
-        m_TargetAssemblyTypeName: Scripts.Game.Player.PlayerInput, Assembly-CSharp
-        m_MethodName: StepForward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &761342251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1968,6 +1934,7 @@ GameObject:
   - component: {fileID: 1181362365}
   - component: {fileID: 1181362364}
   - component: {fileID: 1181362363}
+  - component: {fileID: 1181362368}
   m_Layer: 0
   m_Name: Button Left
   m_TagString: Untagged
@@ -2038,19 +2005,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1181362364}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1679996057}
-        m_TargetAssemblyTypeName: Scripts.Game.Player.PlayerInput, Assembly-CSharp
-        m_MethodName: TurnLeft
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1181362364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2180,6 +2135,7 @@ GameObject:
   - component: {fileID: 1306322038}
   - component: {fileID: 1306322037}
   - component: {fileID: 1306322036}
+  - component: {fileID: 1306322041}
   m_Layer: 0
   m_Name: Button Push
   m_TagString: Untagged
@@ -2250,19 +2206,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1306322037}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1679996057}
-        m_TargetAssemblyTypeName: Scripts.Game.Player.PlayerInput, Assembly-CSharp
-        m_MethodName: Push
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1306322037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2449,6 +2393,7 @@ GameObject:
   - component: {fileID: 1357848865}
   - component: {fileID: 1357848864}
   - component: {fileID: 1357848863}
+  - component: {fileID: 1357848868}
   m_Layer: 0
   m_Name: Button Down
   m_TagString: Untagged
@@ -2519,19 +2464,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1357848864}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1679996057}
-        m_TargetAssemblyTypeName: Scripts.Game.Player.PlayerInput, Assembly-CSharp
-        m_MethodName: StepBackward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1357848864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3306,17 +3239,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3289920496409990056, guid: 05aaebdd5cd67a6439f8f6996a67640e, type: 3}
   m_PrefabInstance: {fileID: 2776144805915490893}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1679996057 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4723071794367054572, guid: 05aaebdd5cd67a6439f8f6996a67640e, type: 3}
-  m_PrefabInstance: {fileID: 2776144805915490893}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64ece7b9382e63a4792163e5744647af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1682381382
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,6 +3283,7 @@ GameObject:
   - component: {fileID: 1721315641}
   - component: {fileID: 1721315640}
   - component: {fileID: 1721315639}
+  - component: {fileID: 1721315644}
   m_Layer: 0
   m_Name: Button Reset
   m_TagString: Untagged
@@ -3412,7 +3335,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3431,19 +3354,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1721315640}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 630988803}
-        m_TargetAssemblyTypeName: WorldManager, Assembly-CSharp
-        m_MethodName: OnMenuResetCallback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1721315640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3756,46 +3667,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7482251606288857825, guid: 05aaebdd5cd67a6439f8f6996a67640e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2776144805915490895}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05aaebdd5cd67a6439f8f6996a67640e, type: 3}
---- !u!1 &2776144805915490894 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7482251606288857825, guid: 05aaebdd5cd67a6439f8f6996a67640e, type: 3}
-  m_PrefabInstance: {fileID: 2776144805915490893}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2776144805915490895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2776144805915490894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9c5e7545737b20047a6f0ed8f17325fb, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1001 &3098969033399549349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3922,6 +3795,118 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1b436dc31227944f8387450952f891a, type: 3}
+--- !u!114 &540244455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540244452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb44962b89944cda28e471221f4147e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputActions: {fileID: -944628639613478452, guid: 9c5e7545737b20047a6f0ed8f17325fb, type: 3}
+  m_Buttons:
+  - {fileID: 1721315639}
+  - {fileID: 99107011}
+--- !u!114 &1721315644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721315637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3ce01613894035a4908730db774b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuEvent: 1
+--- !u!114 &99107016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99107009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3ce01613894035a4908730db774b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuEvent: 3
+--- !u!114 &272017258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272017251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePressure: 0
+  m_ControlPath: <Gamepad>/dpad/right
+--- !u!114 &761342255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761342248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePressure: 0
+  m_ControlPath: <Gamepad>/dpad/up
+--- !u!114 &1181362368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181362361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePressure: 0
+  m_ControlPath: <Gamepad>/dpad/left
+--- !u!114 &1306322041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306322034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePressure: 0
+  m_ControlPath: <Gamepad>/buttonWest
+--- !u!114 &1357848868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357848861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePressure: 0
+  m_ControlPath: <Gamepad>/dpad/down
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

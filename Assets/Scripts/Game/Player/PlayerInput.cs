@@ -15,6 +15,7 @@ namespace Scripts.Game.Player
         // Private members
         private InputAction m_moveAction;
         private InputAction m_pushAction;
+        private bool m_AreActionsEnabled = false;
 
         private Vector3 m_InputMovementVector;
         public Vector3 InputMovementVector => m_InputMovementVector;
@@ -62,31 +63,31 @@ namespace Scripts.Game.Player
             Push();
         }
 
-        public void StepForward()
+        private void StepForward()
         {
             m_InputMovementVector = transform.forward;       
             StartCoroutine(ClearInput());
         }
 
-        public void StepBackward()
+        private void StepBackward()
         {
             m_InputMovementVector = -1f * transform.forward;        
             StartCoroutine(ClearInput());
         }
         
-        public void TurnLeft()
+        private void TurnLeft()
         {
             m_InputRotationVector = -1f * transform.up;         
             StartCoroutine(ClearInput());
         }
 
-        public void TurnRight()
+        private void TurnRight()
         {
             m_InputRotationVector = transform.up;
             StartCoroutine(ClearInput());
         }
 
-        public void Push()
+        private void Push()
         {
             m_InputPushVector = transform.forward;
             StartCoroutine(ClearInput());
@@ -94,6 +95,9 @@ namespace Scripts.Game.Player
 
         private void EnableActions()
         {
+            if (m_AreActionsEnabled) return;
+            m_AreActionsEnabled = true;
+
             m_moveAction.Enable();
             m_moveAction.performed += OnMove;
 
@@ -103,6 +107,9 @@ namespace Scripts.Game.Player
 
         private void DisableActions()
         {
+            if (!m_AreActionsEnabled) return;
+            m_AreActionsEnabled = false;
+
             m_moveAction.performed -= OnMove;
             m_moveAction.Disable();
 
@@ -119,19 +126,35 @@ namespace Scripts.Game.Player
             m_InputPushVector = Vector3.zero;
         }
 
+        // The Player doesn't move while the gamepad is navigating the menu (Reset / Quit buttons)
+        private void OnMenuFocusCallback(bool isMenuFocused)
+        {
+            if (isMenuFocused)
+            {
+                DisableActions();
+            }
+            else if (isActiveAndEnabled)
+            {
+                EnableActions();
+            }
+        }
+
         // MonoBehaviour Callbacks
         private void OnEnable()
         {
             EnableActions();
+            EventHandler.OnMenuFocus += OnMenuFocusCallback;
         }
 
         private void OnDisable()
         {
+            EventHandler.OnMenuFocus -= OnMenuFocusCallback;
             DisableActions();
         }
         
         private void OnDestroy()
         {
+            EventHandler.OnMenuFocus -= OnMenuFocusCallback;
             DisableActions();
         }
     }

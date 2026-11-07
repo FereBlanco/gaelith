@@ -29,7 +29,9 @@ namespace Scripts.Game.Player
             if (m_Player.IsInteractionAllowed && inputPullVector != Vector3.zero)
             {
                 m_Player.DontAllowInteraction();
-                Sequence mySequence = DOTween.Sequence();
+                // SetTarget is needed so that DOTween.Kill(transform) in Player.Reset also kills this Sequence;
+                // otherwise its OnComplete would call AllowInteraction again in the middle of a reset
+                Sequence mySequence = DOTween.Sequence().SetTarget(transform);
                 mySequence.Append(transform.DORotate(new Vector3(transform.eulerAngles.x + m_PullAngle, transform.eulerAngles.y, transform.eulerAngles.z), Constants.PLAYER_PUSH_TIME/2));
                 mySequence.Append(transform.DORotate(new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z), Constants.PLAYER_PUSH_TIME/2)
                     .OnComplete(m_Player.AllowInteraction));

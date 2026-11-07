@@ -706,6 +706,7 @@ GameObject:
   - component: {fileID: 1269440182}
   - component: {fileID: 1269440181}
   - component: {fileID: 1269440180}
+  - component: {fileID: 1269440185}
   m_Layer: 0
   m_Name: Button Start
   m_TagString: Untagged
@@ -757,7 +758,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -776,19 +777,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1269440181}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1494720575}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: OnMenuStartCallback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1269440181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1520,10 +1509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa14205c49968af40b53a698e344e2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartKey: 13
-  m_ResetKey: 114
-  m_NextRoomKey: 110
-  m_QuitKey: 113
+  InputActions: {fileID: -944628639613478452, guid: 9c5e7545737b20047a6f0ed8f17325fb, type: 3}
+  m_ActionMapName: StartScreen
 --- !u!1 &2081946783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,6 +1659,7 @@ GameObject:
   - component: {fileID: 2143793928}
   - component: {fileID: 2143793927}
   - component: {fileID: 2143793926}
+  - component: {fileID: 2143793931}
   m_Layer: 0
   m_Name: Button Quit
   m_TagString: Untagged
@@ -1723,7 +1711,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9254902, g: 0.88235295, b: 0.7294118, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1742,19 +1730,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2143793927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1494720575}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: OnMenuQuitCallback
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2143793927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2184,6 +2160,32 @@ Transform:
   - {fileID: 2032145416}
   m_Father: {fileID: 227988139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269440185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269440178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3ce01613894035a4908730db774b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuEvent: 0
+--- !u!114 &2143793931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143793924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3ce01613894035a4908730db774b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuEvent: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

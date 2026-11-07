@@ -37,12 +37,12 @@ public class MenuManager : MonoBehaviour
     }
 
     // Callbacks
-    public void OnMenuStartCallback()
+    private void OnMenuStartCallback()
     {
         SceneManager.LoadScene(Constants.SCENE_ROOM);
     }
 
-    public void OnMenuQuitCallback()
+    private void OnMenuQuitCallback()
     {
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

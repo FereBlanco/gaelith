@@ -57,6 +57,8 @@ namespace Scripts.Game.Player
         // Initialize & Reset
         public void Initialize()
         {
+            // Kill any pending tween (e.g. FlyToSky) so it can't move the Player after it's placed
+            DOTween.Kill(transform);
             IsCelebrating = false;
             transform.position = m_InitialPosition;
             transform.rotation = m_InitialRotation;
