@@ -51,7 +51,7 @@ public class WorldManager : MonoBehaviour
     }
 
     // Callbacks
-    public void OnMenuResetCallback()
+    private void OnMenuResetCallback()
     {
         m_RoomManager.ResetRoom();
     }
@@ -60,7 +60,7 @@ public class WorldManager : MonoBehaviour
         m_RoomManager.NextRoomFromMenu();
     }
 
-    public void OnMenuQuitCallback()
+    private void OnMenuQuitCallback()
     {
         SceneManager.LoadScene(Constants.SCENE_START);
     }

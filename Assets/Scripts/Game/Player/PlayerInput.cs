@@ -63,31 +63,31 @@ namespace Scripts.Game.Player
             Push();
         }
 
-        public void StepForward()
+        private void StepForward()
         {
             m_InputMovementVector = transform.forward;       
             StartCoroutine(ClearInput());
         }
 
-        public void StepBackward()
+        private void StepBackward()
         {
             m_InputMovementVector = -1f * transform.forward;        
             StartCoroutine(ClearInput());
         }
         
-        public void TurnLeft()
+        private void TurnLeft()
         {
             m_InputRotationVector = -1f * transform.up;         
             StartCoroutine(ClearInput());
         }
 
-        public void TurnRight()
+        private void TurnRight()
         {
             m_InputRotationVector = transform.up;
             StartCoroutine(ClearInput());
         }
 
-        public void Push()
+        private void Push()
         {
             m_InputPushVector = transform.forward;
             StartCoroutine(ClearInput());
